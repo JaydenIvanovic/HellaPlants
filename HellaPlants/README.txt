@@ -1,4 +1,6 @@
 Story:
+
+
 You are the last of an ancient line of landscaping wizards. 
 Your order is dedicated to preserving life on Earth. Unfortunately, while you were napping, 
 global warming, nuclear winter and aliens conspired to eradicate everything. Now, there is 
