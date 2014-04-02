@@ -5,7 +5,10 @@ public class RandomWeather : MonoBehaviour
 {
     public float MAX_SECONDS;
     public GameObject sunny, rainy, cloudy;
+	private GameObject weather;
     private float secondsPassed;
+	public enum Weather {Sunny, Rainy, Cloudy};
+	private Weather currentWeather;
 
 	// Use this for initialization
 	void Start () 
@@ -28,37 +31,34 @@ public class RandomWeather : MonoBehaviour
 
         if (rNum % 3 == 0)
         {
-            Sunny();
+			SetWeather(Weather.Sunny);
         }
         else if (rNum % 3 == 1)
         {
-            Rainy();
+			SetWeather(Weather.Rainy);
         }
         else if (rNum % 3 == 2)
         {
-            Cloudy();
+			SetWeather(Weather.Cloudy);
         }
     }
 
     private void Sunny()
     {
         Debug.Log("Environment: Sunny");
-        GameObject sun = (GameObject) Instantiate(sunny);
-        Destroy(sun, MAX_SECONDS);
+        weather = (GameObject) Instantiate(sunny);
     }
 
     private void Rainy()
     {
         Debug.Log("Environment: Rainy");
-        GameObject rain = (GameObject) Instantiate(rainy);
-        Destroy(rain, MAX_SECONDS);
+        weather = (GameObject) Instantiate(rainy);
     }
 
     private void Cloudy()
     {
         Debug.Log("Environment: Cloudy");
-        GameObject cloud = (GameObject) Instantiate(cloudy);
-        Destroy(cloud, MAX_SECONDS);
+        weather = (GameObject) Instantiate(cloudy);
     }
 
     private void UpdateWeatherTimer()
@@ -75,4 +75,25 @@ public class RandomWeather : MonoBehaviour
             secondsPassed += Time.deltaTime;
         }
     }
+
+	public Weather GetWeather()
+	{
+		return currentWeather;
+	}
+
+	public void SetWeather(Weather w)
+	{
+		currentWeather = w;
+		secondsPassed = 0;
+
+		if (weather)
+			Destroy (weather);
+
+		if (w == Weather.Sunny)
+			Sunny ();
+		else if (w == Weather.Rainy)
+			Rainy ();
+		else if (w == Weather.Cloudy)
+			Cloudy ();
+	}
 }

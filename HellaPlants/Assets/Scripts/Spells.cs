@@ -12,10 +12,14 @@ public class Spells : MonoBehaviour
     public float MAX_SECONDS;
     private GameObject rain_i, fertilizer_i, wind_i, sun_i;
     private float secondsPassed;
+	private GameObject environment;
+	private RandomWeather rw;
 	
     // Use this for initialization
 	void Start () 
     {
+		environment = GameObject.FindGameObjectWithTag ("Environment");
+		rw = environment.GetComponent<RandomWeather> ();
         secondsPassed = 0f;
         Reset();
 	}
@@ -29,22 +33,12 @@ public class Spells : MonoBehaviour
         // Cast sun.
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (!sun_i)
-            {
-                if (timedSpellInProgress)
-                    Reset();
-                sun_i = (GameObject)Instantiate(sun);
-            }
+			rw.SetWeather(RandomWeather.Weather.Sunny);
         }
         // Cast rain.
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (!rain_i)
-            {
-                if (timedSpellInProgress)
-                    Reset();
-                rain_i = (GameObject)Instantiate(rain);
-            }
+			rw.SetWeather(RandomWeather.Weather.Rainy);
         }
         // Cast wind.
         else if (Input.GetKeyDown(KeyCode.Alpha3))

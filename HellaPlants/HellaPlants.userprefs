@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BugAI.cs">
+    <Files>
+      <File FileName="Assets\Scripts\PlantState.cs" Line="24" Column="24" />
+      <File FileName="Assets\Scripts\RandomWeather.cs" Line="90" Column="4" />
+      <File FileName="Assets\Scripts\Spells.cs" Line="41" Column="47" />
+      <File FileName="Assets\Scripts\BugAI.cs" Line="71" Column="59" />
+      <File FileName="Assets\Scripts\DifficultyController.cs" Line="7" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -46,7 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BugAI.cs" />
      <Compile Include="Assets\Scripts\DestoryParticleSystem.cs" />
+     <Compile Include="Assets\Scripts\DifficultyController.cs" />
+     <Compile Include="Assets\Scripts\PlantState.cs" />
      <Compile Include="Assets\Scripts\RandomWeather.cs" />
      <Compile Include="Assets\Scripts\Spells.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
