@@ -14,7 +14,7 @@ public class Spells : MonoBehaviour
     private float secondsPassed;
 	private GameObject environment;
 	private RandomWeather rw;
-	
+
     // Use this for initialization
 	void Start () 
     {
@@ -30,38 +30,45 @@ public class Spells : MonoBehaviour
     {
         bool timedSpellInProgress = TimedSpellInProgress();
         
-        // Cast sun.
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-			rw.SetWeather(RandomWeather.Weather.Sunny);
-        }
-        // Cast rain.
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-			rw.SetWeather(RandomWeather.Weather.Rainy);
-        }
-        // Cast wind.
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (!wind_i)
-            {
-                if (timedSpellInProgress)
-                    Reset();
-                wind_i = (GameObject)Instantiate(wind);
-            }
-        }
-        // Cast fertilizer.
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            if (!fertilizer_i)
-                fertilizer_i = (GameObject) Instantiate(fertilizer);
-        }
-        
         if(timedSpellInProgress)
             CheckWeatherTimer();
     }
 
-    
+	//This method is called from Gestures.cs
+	//TODO: This should accept a list of dirs instead of just one
+	public void setGesture(Gestures.direction dir){
+		// Cast sun.
+		//if (Input.GetKeyDown(KeyCode.Alpha1))
+		if (dir == Gestures.direction.N)
+		{
+			rw.SetWeather(RandomWeather.Weather.Sunny);
+		}
+		// Cast rain.
+		//else if (Input.GetKeyDown(KeyCode.Alpha2))
+		else if (dir == Gestures.direction.S)
+		{
+			rw.SetWeather(RandomWeather.Weather.Rainy);
+		}
+		// Cast wind.
+		//else if (Input.GetKeyDown(KeyCode.Alpha3))
+		else if (dir == Gestures.direction.E)
+		{
+			if (!wind_i)
+			{
+				if (TimedSpellInProgress())
+					Reset();
+				wind_i = (GameObject)Instantiate(wind);
+			}
+		}
+		// Cast fertilizer.
+		//else if (Input.GetKeyDown(KeyCode.Alpha4))
+		else if (dir == Gestures.direction.W)
+		{
+			if (!fertilizer_i)
+				fertilizer_i = (GameObject) Instantiate(fertilizer);
+		}
+	}
+	
     // Reset game state.
     private void Reset()
     {
