@@ -92,4 +92,10 @@ public class PlantState : MonoBehaviour
         // of this script.
         soil = ValueFilter(soil, 5f); 
     }
+
+    // Called by the BugAI script when the bug is attacking the plant.
+    public void TakeDamage()
+    {
+        health = ValueFilter(health, -0.5f);
+    }
 }

@@ -28,6 +28,7 @@ public class BugAI : MonoBehaviour
 			// Check distance to plant.
 			if (CloseToPlant (plant, bug)) 
 			{
+                plant.GetComponent<PlantState>().TakeDamage();
 				// Should also add to numBugsAttacking if first time its close.
 				// circlePlant
 			} 
