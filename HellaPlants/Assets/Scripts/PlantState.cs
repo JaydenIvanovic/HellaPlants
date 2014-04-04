@@ -51,6 +51,9 @@ public class PlantState : MonoBehaviour
         // Soil always gradually depletes.
         soil = ValueFilter(soil, -0.03f);
 
+        // Health always gradually replenishes.
+        health = ValueFilter(health, 0.05f);
+
         // Show visual update.
         Update3DText();
 	}
