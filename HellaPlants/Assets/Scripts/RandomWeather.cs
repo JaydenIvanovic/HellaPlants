@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//#define WEATHERDEBUG
+
+using UnityEngine;
 using System.Collections;
 
 public class RandomWeather : MonoBehaviour 
@@ -55,19 +57,25 @@ public class RandomWeather : MonoBehaviour
 
     private void Sunny()
     {
+#if WEATHERDEBUG
         Debug.Log("Environment: Sunny");
+#endif
         weather = (GameObject) Instantiate(sunny);
     }
 
     private void Rainy()
     {
+#if WEATHERDEBUG
         Debug.Log("Environment: Rainy");
+#endif
         weather = (GameObject) Instantiate(rainy);
     }
 
     private void Cloudy()
     {
+#if WEATHERDEBUG
         Debug.Log("Environment: Cloudy");
+#endif
         cloud1.GetComponent<SpriteRenderer>().color = cloudyCol;
         cloud2.GetComponent<SpriteRenderer>().color = cloudyCol;
         cloud3.GetComponent<SpriteRenderer>().color = cloudyCol;
@@ -79,7 +87,9 @@ public class RandomWeather : MonoBehaviour
     {
         if (secondsPassed >= MAX_SECONDS)
         {
+#if WEATHERDEBUG
             Debug.Log(secondsPassed + " -> hit 3 seconds.");
+#endif
             secondsPassed = 0;
             GetRandomWeather();
         }

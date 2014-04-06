@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿//#define WINDDEBUG
+
+using UnityEngine;
 using System.Collections;
 
 public class WindCollision : MonoBehaviour
@@ -12,7 +14,9 @@ public class WindCollision : MonoBehaviour
 
     void OnParticleCollision(GameObject particleSys)
     {
+#if WINDDEBUG
         Debug.Log("Bug got hit by wind");
+#endif
         bugAI.RemoveBug(gameObject);
     }
 }

@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+﻿//#define SPELLSDEBUG
+
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 /* 
  * Script which handles the user casting spells.
@@ -37,24 +41,44 @@ public class Spells : MonoBehaviour
 
 
 	//This method is called from Gestures.cs
-	//TODO: This should accept a list of dirs instead of just one
-	public void setGesture(Gestures.direction dir){
+	public void setGesture(List<Gestures.direction> dirList){
 		// Cast sun.
 		//if (Input.GetKeyDown(KeyCode.Alpha1))
-		if (dir == Gestures.direction.N)
+		if (dirList.Count == 4 && (
+			(dirList[0] == Gestures.direction.N && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.S && dirList[3] == Gestures.direction.W) ||
+			(dirList[0] == Gestures.direction.E && dirList[1] == Gestures.direction.S && dirList[2] == Gestures.direction.W && dirList[3] == Gestures.direction.N) ||
+			(dirList[0] == Gestures.direction.S && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.N && dirList[3] == Gestures.direction.E) ||
+			(dirList[0] == Gestures.direction.W && dirList[1] == Gestures.direction.N && dirList[2] == Gestures.direction.E && dirList[3] == Gestures.direction.S) ||
+			(dirList[0] == Gestures.direction.N && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.S && dirList[3] == Gestures.direction.E) ||
+			(dirList[0] == Gestures.direction.E && dirList[1] == Gestures.direction.N && dirList[2] == Gestures.direction.W && dirList[3] == Gestures.direction.S) ||
+			(dirList[0] == Gestures.direction.S && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.N && dirList[3] == Gestures.direction.W) ||
+			(dirList[0] == Gestures.direction.W && dirList[1] == Gestures.direction.S && dirList[2] == Gestures.direction.E && dirList[3] == Gestures.direction.W)))
 		{
+#if SPELLSDEBUG
+			Debug.Log("Sun spell cast");
+#endif
 			rw.SetWeather(RandomWeather.Weather.Sunny);
 		}
 		// Cast rain.
 		//else if (Input.GetKeyDown(KeyCode.Alpha2))
-		else if (dir == Gestures.direction.S)
+		else if (dirList.Count == 3 && (
+			(dirList[0] == Gestures.direction.SW && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.SW) ||
+			(dirList[0] == Gestures.direction.NE && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.NE)))
 		{
+#if SPELLSDEBUG
+			Debug.Log("Rain spell cast");
+#endif
 			rw.SetWeather(RandomWeather.Weather.Rainy);
 		}
 		// Cast wind.
 		//else if (Input.GetKeyDown(KeyCode.Alpha3))
-		else if (dir == Gestures.direction.E)
+		else if (dirList.Count == 2 && (
+			(dirList[0] == Gestures.direction.SE && dirList[1] == Gestures.direction.SW) ||
+			(dirList[0] == Gestures.direction.NE && dirList[1] == Gestures.direction.NW)))
 		{
+#if SPELLSDEBUG
+			Debug.Log("Wind spell cast");
+#endif
 			if (!wind_i)
 			{
 				if (TimedSpellInProgress())
@@ -64,8 +88,13 @@ public class Spells : MonoBehaviour
 		}
 		// Cast fertilizer.
 		//else if (Input.GetKeyDown(KeyCode.Alpha4))
-		else if (dir == Gestures.direction.W)
+		else if (dirList.Count == 2 && (
+			(dirList[0] == Gestures.direction.SW && dirList[1] == Gestures.direction.SE) ||
+			(dirList[0] == Gestures.direction.NW && dirList[1] == Gestures.direction.NE)))
 		{
+#if SPELLSDEBUG
+			Debug.Log("Soil spell cast");
+#endif
             if (!fertilizer_i)
             {
                 fertilizer_i = (GameObject)Instantiate(fertilizer);
@@ -104,13 +133,17 @@ public class Spells : MonoBehaviour
     {
         if (secondsPassed >= MAX_SECONDS)
         {
+#if SPELLSDEBUG
             Debug.Log(secondsPassed + " -> hit 3 seconds.");
+#endif
             secondsPassed = 0;
             Reset();
         }
         else
         {
+#if SPELLSDEBUG
             Debug.Log(secondsPassed);
+#endif
             secondsPassed += Time.deltaTime;
         }
     }

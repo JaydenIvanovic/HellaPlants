@@ -1,14 +1,22 @@
-﻿using UnityEngine;
+﻿#define GESTURESDEBUG
+
+using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Gestures : MonoBehaviour {
-	public enum direction{N,NE,E,SE,S,SW,W,NW};
+
+	private struct swipe{
+		public direction dir;
+		public int count;
+		public int index;
+	};
+
+	public enum direction{N,NE,E,SE,S,SW,W,NW,NONE}; //NONE is used if the position didn't change
 	private ArrayList rawData;
 	private bool recording;
 	private Spells spells;
-
-
 
 	// Use this for initialization
 	void Start () {
@@ -36,13 +44,85 @@ public class Gestures : MonoBehaviour {
 
 	private void decipherGesture()
 	{
-		//TODO: Currently this method considers the entire gesture as one direction
-		//      It needs to quantize the raw data into sections, then call findDirection for each one
-		Vector2 first = (Vector2)rawData [0];
-		Vector2 last = (Vector2)rawData [rawData.Count - 1];
-		direction dir = findDirection (first, last);
-		Debug.Log ("Gesture recognised as: " + dir);
-		spells.setGesture (dir);
+
+		/*Quantize the data into compass directions*/
+		List<direction> quantizedData = new List<direction> ();
+		for (int i = 0; i < rawData.Count; i++) {
+
+			if (i == rawData.Count - 1 || ((Vector2)rawData[i] == (Vector2)rawData[i+1])){
+				continue; //Ignore the last element and any repeating elements
+			}
+			else{
+				direction newDir = findDirection ((Vector2)rawData[i],(Vector2)rawData[i+1]);
+				if (newDir != direction.NONE)
+					quantizedData.Add (newDir);
+			}
+		}
+
+		int accuracyThreshold = 3; //This number dictates how many wrong results are allowed before a swipe is broken
+		int lengthThreshold = 4; //This number dictates how long a swipe must be to register. A value of 1 means every movement will count
+
+		/*Filter the data into a smaller set*/
+		List<swipe> swipeList = new List<swipe> ();
+		List<direction> filteredData = new List<direction> ();
+		for (int i = 0; i < quantizedData.Count; i++) {
+
+			bool cont = false;
+
+			/*Check if an existing swipe can be added to*/
+			for (int p = 0; p < swipeList.Count; p++){
+				swipe s = swipeList[p];
+				if (s.dir == quantizedData[i]){
+					s.count++;
+					s.index = i;
+					swipeList[p] = s;
+					cont = true;
+					break;
+				}
+			}
+
+			/*Otherwise, create a new one*/
+			if (cont == false){
+				swipe newSwipe = new swipe();
+				newSwipe.dir = quantizedData[i];
+				newSwipe.index = i;
+				newSwipe.count = 1;
+				swipeList.Add (newSwipe);
+			}
+
+			/*Check all existing swipes, and remove outdated ones*/
+			for (int p = 0; p < swipeList.Count;){
+				if (swipeList[p].index < i - accuracyThreshold){
+					if (swipeList[p].count >= lengthThreshold){
+						filteredData.Add (swipeList[p].dir);
+					}
+					swipeList.RemoveAt(p);
+				}
+				else
+					p++;
+			}
+		}
+
+		/*Add any remaining and valid swipes to the list*/
+		for (int p = 0; p < swipeList.Count; p++){
+			if (swipeList[p].count >= lengthThreshold){
+				filteredData.Add (swipeList[p].dir);
+			}
+		}
+
+#if GESTURESDEBUG
+		string debugString = "";
+		foreach (direction d in filteredData) {
+			debugString += d;
+			debugString += ",";
+		}
+		Debug.Log (debugString);
+#endif
+
+		if (filteredData.Count == 0)
+			return;
+
+		spells.setGesture (filteredData);
 	}
 
 	private direction findDirection(Vector2 start, Vector2 end)
@@ -69,8 +149,10 @@ public class Gestures : MonoBehaviour {
 				return direction.SE;
 			if (xChange < 0 && yChange > 0)
 				return direction.NW;
-			else
+			if (xChange < 0 && yChange < 0)
 				return direction.SW;
+			else
+				return direction.NONE;
 		}
 	}
 
