@@ -34,25 +34,28 @@ public class PlantState : MonoBehaviour
 		// Check the weather.
         if (rw.GetWeather() == RandomWeather.Weather.Sunny)
         {
-            sun = ValueFilter(sun, 0.08f);
-            water = ValueFilter(water, -0.06f);
+            sun = ValueFilter(sun, 0.2f);
+            water = ValueFilter(water, -0.1f);
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Rainy)
         {
-            sun = ValueFilter(sun, -0.06f);
-            water = ValueFilter(water, 0.08f);
+            sun = ValueFilter(sun, -0.1f);
+            water = ValueFilter(water, 0.2f);
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Cloudy)
         {
-            sun = ValueFilter(sun, -0.09f);
-            water = ValueFilter(water, -0.09f);
+            sun = ValueFilter(sun, -0.3f);
+            water = ValueFilter(water, -0.3f);
         }
 
         // Soil always gradually depletes.
-        soil = ValueFilter(soil, -0.03f);
+        soil = ValueFilter(soil, -0.09f);
 
-        // Health always gradually replenishes.
-        health = ValueFilter(health, 0.05f);
+        // We don't want it to replenish if it
+        // has been emptied by a bug.
+        if(health > 0)
+            // Health always gradually replenishes.
+            health = ValueFilter(health, 0.3f);
 
         // Show visual update.
         Update3DText();
@@ -64,10 +67,10 @@ public class PlantState : MonoBehaviour
     {
         GameObject plantVarTxt = GameObject.Find("PlantVariablesText");
 
-        plantVarTxt.transform.Find("HealthLevelsText").GetComponent<TextMesh>().text = "Health: " + health + "%";
-        plantVarTxt.transform.Find("WaterLevelsText").GetComponent<TextMesh>().text = "Water: " + water + "%";
-        plantVarTxt.transform.Find("SoilLevelsText").GetComponent<TextMesh>().text = "Soil: " + soil + "%";
-        plantVarTxt.transform.Find("SunLevelsText").GetComponent<TextMesh>().text = "Sun: " + sun + "%";
+        plantVarTxt.transform.Find("HealthLevelsText").GetComponent<TextMesh>().text = "Health: " +  Mathf.Round(health) + "%";
+        plantVarTxt.transform.Find("WaterLevelsText").GetComponent<TextMesh>().text = "Water: " + Mathf.Round(water) + "%";
+        plantVarTxt.transform.Find("SoilLevelsText").GetComponent<TextMesh>().text = "Soil: " + Mathf.Round(soil) + "%";
+        plantVarTxt.transform.Find("SunLevelsText").GetComponent<TextMesh>().text = "Sun: " + Mathf.Round(sun) + "%";
     }
 
     // Ensure that the number is always between 0 and 100.
@@ -90,7 +93,7 @@ public class PlantState : MonoBehaviour
         // Has to be a larger increase as this gets called once
         // per spell cast and soil always decreases in the update method
         // of this script.
-        soil = ValueFilter(soil, 5f); 
+        soil = ValueFilter(soil, 10f); 
     }
 
     // Called by the BugAI script when the bug is attacking the plant.

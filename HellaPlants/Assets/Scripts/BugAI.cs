@@ -77,4 +77,12 @@ public class BugAI : MonoBehaviour
 		else if (bug.transform.position.x > 0)
 			bug.transform.position += Time.deltaTime * Vector3.left;
 	}
+
+    // Likely to be called when a bug has been blown
+    // away by the wind.
+    public void RemoveBug(GameObject bug)
+    {
+        bugs.Remove(bug);
+        Destroy(bug);
+    }
 }
