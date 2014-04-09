@@ -43,8 +43,7 @@ public class Spells : MonoBehaviour
 	//This method is called from Gestures.cs
 	public void setGesture(List<Gestures.direction> dirList){
 		// Cast sun.
-		//if (Input.GetKeyDown(KeyCode.Alpha1))
-		if (dirList.Count == 4 && (
+		if (Input.GetKeyDown(KeyCode.Alpha1) || dirList.Count == 4 && (
 			(dirList[0] == Gestures.direction.N && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.S && dirList[3] == Gestures.direction.W) ||
 			(dirList[0] == Gestures.direction.E && dirList[1] == Gestures.direction.S && dirList[2] == Gestures.direction.W && dirList[3] == Gestures.direction.N) ||
 			(dirList[0] == Gestures.direction.S && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.N && dirList[3] == Gestures.direction.E) ||
@@ -60,8 +59,7 @@ public class Spells : MonoBehaviour
 			rw.SetWeather(RandomWeather.Weather.Sunny);
 		}
 		// Cast rain.
-		//else if (Input.GetKeyDown(KeyCode.Alpha2))
-		else if (dirList.Count == 3 && (
+		else if (Input.GetKeyDown(KeyCode.Alpha2) || dirList.Count == 3 && (
 			(dirList[0] == Gestures.direction.SW && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.SW) ||
 			(dirList[0] == Gestures.direction.NE && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.NE)))
 		{
@@ -71,8 +69,7 @@ public class Spells : MonoBehaviour
 			rw.SetWeather(RandomWeather.Weather.Rainy);
 		}
 		// Cast wind.
-		//else if (Input.GetKeyDown(KeyCode.Alpha3))
-		else if (dirList.Count == 2 && (
+		else if (Input.GetKeyDown(KeyCode.Alpha3) || dirList.Count == 2 && (
 			(dirList[0] == Gestures.direction.SE && dirList[1] == Gestures.direction.SW) ||
 			(dirList[0] == Gestures.direction.NE && dirList[1] == Gestures.direction.NW)))
 		{
@@ -87,8 +84,7 @@ public class Spells : MonoBehaviour
 			}
 		}
 		// Cast fertilizer.
-		//else if (Input.GetKeyDown(KeyCode.Alpha4))
-		else if (dirList.Count == 2 && (
+		else if (Input.GetKeyDown(KeyCode.Alpha4) || dirList.Count == 2 && (
 			(dirList[0] == Gestures.direction.SW && dirList[1] == Gestures.direction.SE) ||
 			(dirList[0] == Gestures.direction.NW && dirList[1] == Gestures.direction.NE)))
 		{
@@ -102,7 +98,7 @@ public class Spells : MonoBehaviour
             }
 		}
 	}
-	
+
 
     // Reset game state.
     private void Reset()

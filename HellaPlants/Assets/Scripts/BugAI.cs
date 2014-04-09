@@ -59,7 +59,7 @@ public class BugAI : MonoBehaviour
 	private void CreateBugs()
 	{
         // Simple placeholder logic....
-        if( Random.Range(1, 10000) > 9990 )
+        if( Random.Range(1, 10000) > 9900 )
             InstantiateBug ();
 	}
 

@@ -101,4 +101,9 @@ public class PlantState : MonoBehaviour
     {
         health = ValueFilter(health, -0.5f);
     }
+
+	void OnMouseDown()
+	{
+		Debug.Log ("HIT PLANT");
+	}
 }
