@@ -43,51 +43,51 @@ public class Spells : MonoBehaviour
 	//This method is called from Gestures.cs
 	public void setGesture(List<Gestures.direction> dirList){
 		// Cast sun.
-		if (Input.GetKeyDown(KeyCode.Alpha1) || dirList.Count == 4 && (
-			(dirList[0] == Gestures.direction.N && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.S && dirList[3] == Gestures.direction.W) ||
-			(dirList[0] == Gestures.direction.E && dirList[1] == Gestures.direction.S && dirList[2] == Gestures.direction.W && dirList[3] == Gestures.direction.N) ||
-			(dirList[0] == Gestures.direction.S && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.N && dirList[3] == Gestures.direction.E) ||
-			(dirList[0] == Gestures.direction.W && dirList[1] == Gestures.direction.N && dirList[2] == Gestures.direction.E && dirList[3] == Gestures.direction.S) ||
-			(dirList[0] == Gestures.direction.N && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.S && dirList[3] == Gestures.direction.E) ||
-			(dirList[0] == Gestures.direction.E && dirList[1] == Gestures.direction.N && dirList[2] == Gestures.direction.W && dirList[3] == Gestures.direction.S) ||
-			(dirList[0] == Gestures.direction.S && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.N && dirList[3] == Gestures.direction.W) ||
-			(dirList[0] == Gestures.direction.W && dirList[1] == Gestures.direction.S && dirList[2] == Gestures.direction.E && dirList[3] == Gestures.direction.W)))
-		{
+        if (Input.GetKeyDown(KeyCode.Alpha1) || dirList.Count == 4 && (
+            (dirList[0] == Gestures.direction.N && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.S && dirList[3] == Gestures.direction.W) ||
+            (dirList[0] == Gestures.direction.E && dirList[1] == Gestures.direction.S && dirList[2] == Gestures.direction.W && dirList[3] == Gestures.direction.N) ||
+            (dirList[0] == Gestures.direction.S && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.N && dirList[3] == Gestures.direction.E) ||
+            (dirList[0] == Gestures.direction.W && dirList[1] == Gestures.direction.N && dirList[2] == Gestures.direction.E && dirList[3] == Gestures.direction.S) ||
+            (dirList[0] == Gestures.direction.N && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.S && dirList[3] == Gestures.direction.E) ||
+            (dirList[0] == Gestures.direction.E && dirList[1] == Gestures.direction.N && dirList[2] == Gestures.direction.W && dirList[3] == Gestures.direction.S) ||
+            (dirList[0] == Gestures.direction.S && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.N && dirList[3] == Gestures.direction.W) ||
+            (dirList[0] == Gestures.direction.W && dirList[1] == Gestures.direction.S && dirList[2] == Gestures.direction.E && dirList[3] == Gestures.direction.W)))
+        {
 #if SPELLSDEBUG
 			Debug.Log("Sun spell cast");
 #endif
-			rw.SetWeather(RandomWeather.Weather.Sunny);
-		}
-		// Cast rain.
-		else if (Input.GetKeyDown(KeyCode.Alpha2) || dirList.Count == 3 && (
-			(dirList[0] == Gestures.direction.SW && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.SW) ||
-			(dirList[0] == Gestures.direction.NE && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.NE)))
-		{
+            rw.SetWeather(RandomWeather.Weather.Sunny);
+        }
+        // Cast rain.
+        else if (Input.GetKeyDown(KeyCode.Alpha2) || dirList.Count == 3 && (
+            (dirList[0] == Gestures.direction.SW && dirList[1] == Gestures.direction.E && dirList[2] == Gestures.direction.SW) ||
+            (dirList[0] == Gestures.direction.NE && dirList[1] == Gestures.direction.W && dirList[2] == Gestures.direction.NE)))
+        {
 #if SPELLSDEBUG
 			Debug.Log("Rain spell cast");
 #endif
-			rw.SetWeather(RandomWeather.Weather.Rainy);
-		}
-		// Cast wind.
-		else if (Input.GetKeyDown(KeyCode.Alpha3) || dirList.Count == 2 && (
-			(dirList[0] == Gestures.direction.SE && dirList[1] == Gestures.direction.SW) ||
-			(dirList[0] == Gestures.direction.NE && dirList[1] == Gestures.direction.NW)))
-		{
+            rw.SetWeather(RandomWeather.Weather.Rainy);
+        }
+        // Cast wind.
+        else if (Input.GetKeyDown(KeyCode.Alpha3) || dirList.Count == 2 && (
+            (dirList[0] == Gestures.direction.SE && dirList[1] == Gestures.direction.SW) ||
+            (dirList[0] == Gestures.direction.NE && dirList[1] == Gestures.direction.NW)))
+        {
 #if SPELLSDEBUG
 			Debug.Log("Wind spell cast");
 #endif
-			if (!wind_i)
-			{
-				if (TimedSpellInProgress())
-					Reset();
-				wind_i = (GameObject)Instantiate(wind);
-			}
-		}
-		// Cast fertilizer.
-		else if (Input.GetKeyDown(KeyCode.Alpha4) || dirList.Count == 2 && (
-			(dirList[0] == Gestures.direction.SW && dirList[1] == Gestures.direction.SE) ||
-			(dirList[0] == Gestures.direction.NW && dirList[1] == Gestures.direction.NE)))
-		{
+            if (!wind_i)
+            {
+                if (TimedSpellInProgress())
+                    Reset();
+                wind_i = (GameObject)Instantiate(wind);
+            }
+        }
+        // Cast fertilizer.
+        else if (Input.GetKeyDown(KeyCode.Alpha4) || dirList.Count == 2 && (
+            (dirList[0] == Gestures.direction.SW && dirList[1] == Gestures.direction.SE) ||
+            (dirList[0] == Gestures.direction.NW && dirList[1] == Gestures.direction.NE)))
+        {
 #if SPELLSDEBUG
 			Debug.Log("Soil spell cast");
 #endif
@@ -96,7 +96,12 @@ public class Spells : MonoBehaviour
                 fertilizer_i = (GameObject)Instantiate(fertilizer);
                 flower.GetComponent<PlantState>().IncreaseSoil();
             }
-		}
+        }
+        // Cast fireball.
+        else if (dirList.Count == 1 && (dirList[0] == Gestures.direction.N))
+        {
+            GetComponent<Wand>().castFireball();
+        }
 	}
 
 

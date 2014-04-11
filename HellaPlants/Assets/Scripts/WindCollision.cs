@@ -26,8 +26,7 @@ public class WindCollision : MonoBehaviour
 		Vector2 mouse = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		if (Input.GetMouseButtonDown (0)) 
 		{
-			Debug.Log(Vector2.Distance (mouse, gameObject.transform.position));
-			if (Vector2.Distance (mouse, gameObject.transform.position) < 0.4) 
+            if( Vector2.Distance(mouse, gameObject.transform.position) < 0.4) 
 			{
 				Debug.Log ("Inner if");
 				bugAI.RemoveBug (gameObject);

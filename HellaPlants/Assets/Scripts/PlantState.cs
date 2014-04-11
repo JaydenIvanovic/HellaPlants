@@ -55,7 +55,7 @@ public class PlantState : MonoBehaviour
         // has been emptied by a bug.
         if(health > 0)
             // Health always gradually replenishes.
-            health = ValueFilter(health, 0.3f);
+            health = ValueFilter(health, 0.1f);
 
         // Show visual update.
         Update3DText();
@@ -93,7 +93,7 @@ public class PlantState : MonoBehaviour
         // Has to be a larger increase as this gets called once
         // per spell cast and soil always decreases in the update method
         // of this script.
-        soil = ValueFilter(soil, 10f); 
+        soil = ValueFilter(soil, 25f); 
     }
 
     // Called by the BugAI script when the bug is attacking the plant.
