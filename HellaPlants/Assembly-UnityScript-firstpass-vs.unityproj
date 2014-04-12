@@ -48,6 +48,21 @@
   <ItemGroup>
      <Compile Include="Assets\Standard Assets\Particles\Legacy Particles\TimedObjectDestructor.js" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+ <Reference Include="Accord">
+ <HintPath>Assets\Accord.dll</HintPath>
+ </Reference>
+ <Reference Include="Accord.Math">
+ <HintPath>Assets\Accord.Math.dll</HintPath>
+ </Reference>
+ <Reference Include="Accord.Statistics">
+ <HintPath>Assets\Accord.Statistics.dll</HintPath>
+ </Reference>
+ <Reference Include="AForge">
+ <HintPath>Assets\AForge.dll</HintPath>
+ </Reference>
+ <Reference Include="AForge.Math">
+ <HintPath>Assets\AForge.Math.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

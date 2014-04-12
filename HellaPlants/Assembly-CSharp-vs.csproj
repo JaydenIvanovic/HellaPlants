@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\DestoryParticleSystem.cs" />
      <Compile Include="Assets\Scripts\DifficultyController.cs" />
      <Compile Include="Assets\Scripts\Gestures.cs" />
+     <Compile Include="Assets\Scripts\HiddenMarkovModel.cs" />
      <Compile Include="Assets\Scripts\PlantState.cs" />
      <Compile Include="Assets\Scripts\RandomWeather.cs" />
      <Compile Include="Assets\Scripts\Spells.cs" />
@@ -60,6 +61,21 @@
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
+ </Reference>
+ <Reference Include="Accord">
+ <HintPath>Assets\Accord.dll</HintPath>
+ </Reference>
+ <Reference Include="Accord.Math">
+ <HintPath>Assets\Accord.Math.dll</HintPath>
+ </Reference>
+ <Reference Include="Accord.Statistics">
+ <HintPath>Assets\Accord.Statistics.dll</HintPath>
+ </Reference>
+ <Reference Include="AForge">
+ <HintPath>Assets\AForge.dll</HintPath>
+ </Reference>
+ <Reference Include="AForge.Math">
+ <HintPath>Assets\AForge.Math.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

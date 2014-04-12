@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\DestoryParticleSystem.cs" />
      <Compile Include="Assets\Scripts\DifficultyController.cs" />
      <Compile Include="Assets\Scripts\Gestures.cs" />
+     <Compile Include="Assets\Scripts\HiddenMarkovModel.cs" />
      <Compile Include="Assets\Scripts\PlantState.cs" />
      <Compile Include="Assets\Scripts\RandomWeather.cs" />
      <Compile Include="Assets\Scripts\Spells.cs" />
@@ -58,6 +59,21 @@
      <Compile Include="Assets\Scripts\Wand.cs" />
      <Compile Include="Assets\Scripts\WindCollision.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+ <Reference Include="Accord">
+ <HintPath>Assets\Accord.dll</HintPath>
+ </Reference>
+ <Reference Include="Accord.Math">
+ <HintPath>Assets\Accord.Math.dll</HintPath>
+ </Reference>
+ <Reference Include="Accord.Statistics">
+ <HintPath>Assets\Accord.Statistics.dll</HintPath>
+ </Reference>
+ <Reference Include="AForge">
+ <HintPath>Assets\AForge.dll</HintPath>
+ </Reference>
+ <Reference Include="AForge.Math">
+ <HintPath>Assets\AForge.Math.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">

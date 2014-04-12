@@ -18,6 +18,7 @@ public class Spells : MonoBehaviour
     private float secondsPassed;
 	private GameObject environment, flower;
 	private RandomWeather rw;
+    private HiddenMarkovModel hmm;
 
     // Use this for initialization
 	void Start () 
@@ -25,6 +26,7 @@ public class Spells : MonoBehaviour
 		environment = GameObject.FindGameObjectWithTag ("Environment");
         flower = GameObject.Find("Flower");
 		rw = environment.GetComponent<RandomWeather> ();
+        //hmm = new HiddenMarkovModel();
         secondsPassed = 0f;
         Reset();
 	}
@@ -102,6 +104,9 @@ public class Spells : MonoBehaviour
         {
             GetComponent<Wand>().castFireball();
         }
+#if GESTURESDEBUG 
+        // Debug.Log(hmm.classifySequence(dirList));
+#endif
 	}
 
 
