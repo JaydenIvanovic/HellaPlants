@@ -7,7 +7,12 @@ public class PlantState : MonoBehaviour
     private float soil {get;set;}
     private float water {get;set;}
     private float sun {get;set;}
+    public int growthSecs;
     private RandomWeather rw;
+    private SpriteRenderer spriteR;
+    private Timer growthTimer;
+    private uint growthLevel;
+    public Sprite f1, f2, f3, f4, f5;
 
 	// Use this for initialization
 	void Awake () 
@@ -22,14 +27,21 @@ public class PlantState : MonoBehaviour
     {
         GameObject environ = GameObject.FindGameObjectWithTag("Environment");
         rw = environ.GetComponent<RandomWeather>();
+        spriteR = GetComponent<SpriteRenderer>();
+        growthTimer = new Timer(growthSecs);
+        growthLevel = 0;
     }
 
 	// Update is called once per frame
 	void Update () 
 	{
-		// Check the difficulty.
-
-		// Check for pests.
+        // Handle plant growth.
+        growthTimer.updateTimer(Time.deltaTime);
+        if (growthTimer.hitMaxTime())
+        {
+            Grow();
+            growthTimer.resetTimer();
+        }
 
 		// Check the weather.
         if (rw.GetWeather() == RandomWeather.Weather.Sunny)
@@ -102,8 +114,20 @@ public class PlantState : MonoBehaviour
         health = ValueFilter(health, -0.5f);
     }
 
-	void OnMouseDown()
-	{
-		Debug.Log ("HIT PLANT");
-	}
+    // Change the plant to its next 'growth form'.
+    private void Grow()
+    {
+        if(growthLevel == 0)
+            spriteR.sprite = f1;
+        else if(growthLevel == 1)
+            spriteR.sprite = f2;
+        else if(growthLevel == 2)
+            spriteR.sprite = f3;
+        else if(growthLevel == 3)
+            spriteR.sprite = f4;
+        else if(growthLevel == 4)
+            spriteR.sprite = f5;
+
+        growthLevel++;
+    }
 }

@@ -12,11 +12,14 @@ public class BugAI : MonoBehaviour
 	private int numBugsAtt;
 	private const float CLOSE_TO_PLANT = 1.5f;
 	private int numBugs = 0;
+    private Timer attackTimer;
+    public int initalSpwnRate, minSpwnRate, maxSpwnRate;
 
 	// Use this for initialization
 	void Start () 
 	{
         bugs = new List<GameObject>();
+        attackTimer = new Timer(initalSpwnRate);
 	}
 	
 	// Update is called once per frame
@@ -58,9 +61,14 @@ public class BugAI : MonoBehaviour
     // If so, the bug is created.
 	private void CreateBugs()
 	{
-        // Simple placeholder logic....
-        if( Random.Range(1, 10000) > 9900 )
-            InstantiateBug ();
+        attackTimer.updateTimer(Time.deltaTime);
+
+        if (attackTimer.hitMaxTime())
+        {
+            InstantiateBug();
+            attackTimer.setMaxSeconds(Random.Range(minSpwnRate, maxSpwnRate));
+            attackTimer.resetTimer();
+        }
 	}
 
     // Checks whether the bug is close to the plant. 
@@ -86,5 +94,12 @@ public class BugAI : MonoBehaviour
     {
         bugs.Remove(bug);
         Destroy(bug);
+    }
+
+
+    // To be called by the difficulty manager.
+    public void UpdateDifficulty()
+    {
+
     }
 }

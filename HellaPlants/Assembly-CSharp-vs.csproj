@@ -63,19 +63,19 @@
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="Accord">
- <HintPath>Assets\Accord.dll</HintPath>
+ <HintPath>Assets\Plugins\Accord.dll</HintPath>
  </Reference>
  <Reference Include="Accord.Math">
- <HintPath>Assets\Accord.Math.dll</HintPath>
+ <HintPath>Assets\Plugins\Accord.Math.dll</HintPath>
  </Reference>
  <Reference Include="Accord.Statistics">
- <HintPath>Assets\Accord.Statistics.dll</HintPath>
+ <HintPath>Assets\Plugins\Accord.Statistics.dll</HintPath>
  </Reference>
  <Reference Include="AForge">
- <HintPath>Assets\AForge.dll</HintPath>
+ <HintPath>Assets\Plugins\AForge.dll</HintPath>
  </Reference>
  <Reference Include="AForge.Math">
- <HintPath>Assets\AForge.Math.dll</HintPath>
+ <HintPath>Assets\Plugins\AForge.Math.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
