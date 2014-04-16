@@ -7,6 +7,8 @@ public class UfoAI : MonoBehaviour
     public float minX, maxX;
     private float xLoc;
     private bool isMoving;
+	private GameObject environment;
+	private DifficultyController diffContr;
 
 	// Use this for initialization
 	void Start () 
@@ -14,6 +16,8 @@ public class UfoAI : MonoBehaviour
         xLoc = 0.0f;
         isMoving = false;
         timer = new Timer(Random.Range(1,3));
+		environment = GameObject.FindGameObjectWithTag("Environment");
+		diffContr = environment.GetComponent<DifficultyController> ();
 	}
 	
 	// Update is called once per frame
@@ -52,7 +56,7 @@ public class UfoAI : MonoBehaviour
 
         newLocation = new Vector3(xLoc, transform.position.y, transform.position.z);
 
-        transform.position += new Vector3(Time.deltaTime * x, 0, 0);
+        transform.position += new Vector3(Time.deltaTime * x * (float)(diffContr.GetDifficulty() * 0.1 + 1), 0, 0);
 #if UFODEBUG
         Debug.Log(transform.position.ToString() + " " + newLocation.ToString());
         Debug.Log(Vector3.Distance(newLocation, transform.position));

@@ -13,11 +13,15 @@ public class BugAI : MonoBehaviour
 	private const float CLOSE_TO_PLANT = 1.5f;
 	private int numBugs = 0;
     private Timer attackTimer;
-    public int initalSpwnRate, minSpwnRate, maxSpwnRate;
-
+    public float initalSpwnRate, minSpwnRate, maxSpwnRate;
+	public AudioClip sq;
+	private DifficultyController diff;
+	private GameObject d;
 	// Use this for initialization
 	void Start () 
 	{
+		d = GameObject.FindGameObjectWithTag ("Environment");
+		diff = d.GetComponent<DifficultyController> ();
         bugs = new List<GameObject>();
         attackTimer = new Timer(initalSpwnRate);
 	}
@@ -43,16 +47,23 @@ public class BugAI : MonoBehaviour
 			}
 		}
 	}
-    
-    // Creates a new bug and adds it to the list.
+
+// Creates a new bug and adds it to the list.
 	private void InstantiateBug()
 	{
 		int rNum = Random.Range(1,3);
+		float xpos;
+		float ypos;
+
+		do {
+			xpos = Random.Range (-14F, 14F); 
+			ypos = Random.Range (-6F, 4F); 
+		} while((xpos < 6F && xpos > -6F) && (ypos < 3F));
 
 		if (rNum == 1)
-			bugs.Add((GameObject)Instantiate (redbug));
+			bugs.Add((GameObject)Instantiate (redbug, new Vector3(xpos, ypos, 0), Quaternion.identity));
 		else if (rNum == 2)
-			bugs.Add((GameObject)Instantiate (bluebug));
+			bugs.Add((GameObject)Instantiate (bluebug, new Vector3(xpos, ypos, 0), Quaternion.identity));
 
 		numBugs++;
 	}
@@ -65,6 +76,9 @@ public class BugAI : MonoBehaviour
 
         if (attackTimer.hitMaxTime())
         {
+			maxSpwnRate = Mathf.Pow(10, -diff.GetDifficulty() * 0.1f);
+			minSpwnRate = Mathf.Pow(2, -diff.GetDifficulty() * 0.1f);
+
             InstantiateBug();
             attackTimer.setMaxSeconds(Random.Range(minSpwnRate, maxSpwnRate));
             attackTimer.resetTimer();
@@ -83,22 +97,28 @@ public class BugAI : MonoBehaviour
 	private void MoveToPlant(GameObject bug)
 	{
 		if (bug.transform.position.x < 0) 
-			bug.transform.position += Time.deltaTime * Vector3.right;
+			bug.transform.position += Time.deltaTime * Vector3.right * (float)(diff.GetDifficulty() * 0.1f + 1);
 		else if (bug.transform.position.x > 0)
-			bug.transform.position += Time.deltaTime * Vector3.left;
+			bug.transform.position += Time.deltaTime * Vector3.left * (float)(diff.GetDifficulty() * 0.1f + 1);
+		if (bug.transform.position.y > -2.65F)
+			bug.transform.position += Time.deltaTime * Vector3.down * (float)(diff.GetDifficulty() * 0.1f + 1);
+		else if (bug.transform.position.y < -2.65F)
+			bug.transform.position += Time.deltaTime * Vector3.up * (float)(diff.GetDifficulty() * 0.1f + 1);
 	}
 
     // Likely to be called when a bug has been blown
     // away by the wind.
     public void RemoveBug(GameObject bug)
     {
+		audio.PlayOneShot (sq);
         bugs.Remove(bug);
         Destroy(bug);
+		(diff.scr) += 10;
     }
 
 
     // To be called by the difficulty manager.
-    public void UpdateDifficulty()
+    public void UpdateSpawnRate()
     {
 
     }

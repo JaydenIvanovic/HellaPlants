@@ -9,7 +9,9 @@ public class PlantState : MonoBehaviour
     private float sun {get;set;}
     public int growthSecs;
     private RandomWeather rw;
+	private DifficultyController diffContr;
     private SpriteRenderer spriteR;
+	private GameObject environ;
     private Timer growthTimer;
     private uint growthLevel;
     public Sprite f1, f2, f3, f4, f5;
@@ -25,8 +27,9 @@ public class PlantState : MonoBehaviour
 	
     void Start()
     {
-        GameObject environ = GameObject.FindGameObjectWithTag("Environment");
+        environ = GameObject.FindGameObjectWithTag("Environment");
         rw = environ.GetComponent<RandomWeather>();
+		diffContr = environ.GetComponent<DifficultyController> ();
         spriteR = GetComponent<SpriteRenderer>();
         growthTimer = new Timer(growthSecs);
         growthLevel = 0;
@@ -36,38 +39,40 @@ public class PlantState : MonoBehaviour
 	void Update () 
 	{
         // Handle plant growth.
+		/*
         growthTimer.updateTimer(Time.deltaTime);
         if (growthTimer.hitMaxTime())
         {
             Grow();
             growthTimer.resetTimer();
-        }
+        }*/
+		Grow ();
 
 		// Check the weather.
         if (rw.GetWeather() == RandomWeather.Weather.Sunny)
         {
-            sun = ValueFilter(sun, 0.2f);
-            water = ValueFilter(water, -0.1f);
+			sun = ValueFilter(sun, Time.deltaTime * ( Mathf.Pow(5f, -diffContr.GetDifficulty() * 0.1f) + 5 ) );
+			water = ValueFilter(water, Time.deltaTime * Mathf.Pow(-4f, diffContr.GetDifficulty() * 0.1f));
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Rainy)
         {
-            sun = ValueFilter(sun, -0.1f);
-            water = ValueFilter(water, 0.2f);
+            sun = ValueFilter(sun, Time.deltaTime * -4f);
+            water = ValueFilter(water, Time.deltaTime * 5f);
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Cloudy)
         {
-            sun = ValueFilter(sun, -0.3f);
-            water = ValueFilter(water, -0.3f);
+            sun = ValueFilter(sun, Time.deltaTime * -7f);
+            water = ValueFilter(water, Time.deltaTime * -7f);
         }
 
         // Soil always gradually depletes.
-        soil = ValueFilter(soil, -0.09f);
+        soil = ValueFilter(soil, Time.deltaTime * -2f);
 
         // We don't want it to replenish if it
         // has been emptied by a bug.
         if(health > 0)
             // Health always gradually replenishes.
-            health = ValueFilter(health, 0.1f);
+            health = ValueFilter(health, Time.deltaTime * 1f);
 
         // Show visual update.
         Update3DText();
@@ -105,29 +110,33 @@ public class PlantState : MonoBehaviour
         // Has to be a larger increase as this gets called once
         // per spell cast and soil always decreases in the update method
         // of this script.
-        soil = ValueFilter(soil, 25f); 
+        soil = ValueFilter(soil, 100f); 
     }
 
     // Called by the BugAI script when the bug is attacking the plant.
     public void TakeDamage()
     {
-        health = ValueFilter(health, -0.5f);
+        health = ValueFilter(health, Time.deltaTime * -2f);
     }
 
     // Change the plant to its next 'growth form'.
     private void Grow()
     {
-        if(growthLevel == 0)
+		//Debug.Log ("Difficulty");
+
+        if(diffContr.GetDifficulty() == 1)
             spriteR.sprite = f1;
-        else if(growthLevel == 1)
+		else if(diffContr.GetDifficulty() == 2)
             spriteR.sprite = f2;
-        else if(growthLevel == 2)
+		else if(diffContr.GetDifficulty() == 3)
             spriteR.sprite = f3;
-        else if(growthLevel == 3)
+		else if(diffContr.GetDifficulty() == 4)
             spriteR.sprite = f4;
-        else if(growthLevel == 4)
+		else if(diffContr.GetDifficulty() == 5)
             spriteR.sprite = f5;
 
         growthLevel++;
     }
+
+
 }

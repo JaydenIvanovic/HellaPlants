@@ -20,7 +20,7 @@ public class WindCollision : MonoBehaviour
 #endif
         bugAI.RemoveBug(gameObject);
     }
-
+//click to kill
 	void Update()
 	{
 		Vector2 mouse = Camera.main.ScreenToWorldPoint (Input.mousePosition);

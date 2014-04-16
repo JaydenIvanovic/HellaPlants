@@ -14,6 +14,11 @@ public class RandomWeather : MonoBehaviour
     private GameObject cloud1, cloud2, cloud3, cloud4;
     private bool cloudy;
     private static Color32 cloudyCol;
+	public AudioClip Rain;
+	public AudioClip Sun;
+	public AudioClip Cloud;
+	private AudioClip Snd;
+	private float r,s,c;
 
 	// Use this for initialization
 	void Start () 
@@ -110,8 +115,12 @@ public class RandomWeather : MonoBehaviour
 		currentWeather = w;
 		secondsPassed = 0;
 
-		if (weather)
+		if (weather) 
+		{
+			//Destroy(AudioSource);
+			//Debug.Log (weather);
 			Destroy (weather);
+		}
 
         if(cloudy)
         {
@@ -123,10 +132,26 @@ public class RandomWeather : MonoBehaviour
         }
 
 		if (w == Weather.Sunny)
+		{
 			Sunny ();
-		else if (w == Weather.Rainy)
+			Snd = Sun;
+		}
+		else if (w == Weather.Rainy) 
+		{
 			Rainy ();
+			Snd = Rain;
+		}
 		else if (w == Weather.Cloudy)
+		{
 			Cloudy ();
+			Snd = Cloud;
+		}
+
+		if (Snd) 
+		{
+			Destroy(GameObject.Find("One shot audio"));
+		}
+		AudioSource.PlayClipAtPoint(Snd, transform.position,100F);
+		//Snd.SetScheduledEndTime (3);
 	}
 }
