@@ -51,8 +51,8 @@ public class PlantState : MonoBehaviour
 		// Check the weather.
         if (rw.GetWeather() == RandomWeather.Weather.Sunny)
         {
-			sun = ValueFilter(sun, Time.deltaTime * ( Mathf.Pow(5f, -diffContr.GetDifficulty() * 0.1f) + 5 ) );
-			water = ValueFilter(water, Time.deltaTime * Mathf.Pow(-4f, diffContr.GetDifficulty() * 0.1f));
+			sun = ValueFilter(sun, Time.deltaTime * 5f);
+			water = ValueFilter(water, Time.deltaTime * -4f);
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Rainy)
         {
@@ -118,6 +118,12 @@ public class PlantState : MonoBehaviour
     {
         health = ValueFilter(health, Time.deltaTime * -2f);
     }
+
+	// Version of TakeDamage where the damage can be passed as an parameter.
+	public void TakeDamage(float damage)
+	{
+		health = ValueFilter (health, -damage);
+	}
 
     // Change the plant to its next 'growth form'.
     private void Grow()

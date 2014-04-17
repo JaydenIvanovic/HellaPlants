@@ -49,13 +49,16 @@
      <Compile Include="Assets\Scripts\BugAI.cs" />
      <Compile Include="Assets\Scripts\DestoryParticleSystem.cs" />
      <Compile Include="Assets\Scripts\DifficultyController.cs" />
+     <Compile Include="Assets\Scripts\GestureMap.cs" />
      <Compile Include="Assets\Scripts\Gestures.cs" />
      <Compile Include="Assets\Scripts\HiddenMarkovModel.cs" />
+     <Compile Include="Assets\Scripts\ListComparer.cs" />
      <Compile Include="Assets\Scripts\LoadLevelonClick.cs" />
      <Compile Include="Assets\Scripts\PlantState.cs" />
      <Compile Include="Assets\Scripts\RandomWeather.cs" />
      <Compile Include="Assets\Scripts\Spells.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
+     <Compile Include="Assets\Scripts\UFOProjectile.cs" />
      <Compile Include="Assets\Scripts\UfoAI.cs" />
      <Compile Include="Assets\Scripts\Wand.cs" />
      <Compile Include="Assets\Scripts\WindCollision.cs" />

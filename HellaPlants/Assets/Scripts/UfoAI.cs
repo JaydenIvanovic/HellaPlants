@@ -7,8 +7,9 @@ public class UfoAI : MonoBehaviour
     public float minX, maxX;
     private float xLoc;
     private bool isMoving;
-	private GameObject environment;
+	private GameObject environment, plant;
 	private DifficultyController diffContr;
+	public GameObject thunder;
 
 	// Use this for initialization
 	void Start () 
@@ -17,6 +18,7 @@ public class UfoAI : MonoBehaviour
         isMoving = false;
         timer = new Timer(Random.Range(1,3));
 		environment = GameObject.FindGameObjectWithTag("Environment");
+		plant = GameObject.Find("Flower");
 		diffContr = environment.GetComponent<DifficultyController> ();
 	}
 	
@@ -25,6 +27,7 @@ public class UfoAI : MonoBehaviour
     {
 	    if (timer.hitMaxTime())
         {
+			shootBolt();
             xLoc = Random.Range(-9, 9);
             isMoving = true;
             timer.resetTimer();
@@ -34,6 +37,10 @@ public class UfoAI : MonoBehaviour
             moveToRandomLocation();
         else
             timer.updateTimer(Time.deltaTime); 
+
+		// Fix this to use a timer instead...
+		if(Random.Range(1, 10) == 1)
+			;//shootBolt();
 	}
 
     // Test whether the ufo should move to a different location.
@@ -64,4 +71,12 @@ public class UfoAI : MonoBehaviour
         if (Vector3.Distance(newLocation, transform.position) <= 0.1)
             isMoving = false;
     }
+
+	// Shoot a bullet in the direction of the plant.
+	private void shootBolt()
+	{
+		Vector3 dirToPlant = Vector3.Normalize(plant.transform.position - transform.position);
+		GameObject newBolt = (GameObject)Instantiate (thunder, transform.position, transform.rotation);
+		newBolt.GetComponent<UFOProjectile>().SetDirection(dirToPlant);
+	}
 }
