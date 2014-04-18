@@ -110,6 +110,29 @@ public class GestureMap
 		                                              Gestures.direction.SE,
 													  Gestures.direction.E}, 
 		               Spell.Fert);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W, 
+		                                              Gestures.direction.SW,
+													  Gestures.direction.SE}, 
+		               Spell.Fert);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.SE}, 
+		               Spell.Fert);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.SE,
+													  Gestures.direction.S}, 
+		               Spell.Fert);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W, 
+		                                              Gestures.direction.SW,
+													  Gestures.direction.SE,
+													  Gestures.direction.S}, 
+		               Spell.Fert);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.E,
+													  Gestures.direction.SE}, 
+		               Spell.Fert);
 	}
 
 	// All the recognized wind gesture sequences.

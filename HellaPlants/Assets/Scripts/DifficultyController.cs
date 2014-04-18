@@ -7,6 +7,7 @@ public class DifficultyController : MonoBehaviour
 	public float scr;
 	public float s;
 	public float changeDiff;
+	public GUIStyle guiStyle;
 	private string score;
 	private int difflv = 0;
 	private float current;
@@ -15,6 +16,7 @@ public class DifficultyController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		DontDestroyOnLoad (gameObject);
 		scr = 0;
 		timeSinceLastDiff = 0f;
 	}
@@ -23,7 +25,7 @@ public class DifficultyController : MonoBehaviour
 	void Update () 
 	{
 		s = Time.time + scr;
-		score = "score: " + s.ToString ();
+		score = "Score: " + s.ToString ();
 
 		if (timeSinceLastDiff > changeDiff) {
 			difflv++;
@@ -35,12 +37,17 @@ public class DifficultyController : MonoBehaviour
 
 	void OnGUI() 
 	{
-		GUI.Label(new Rect(10, 10, 150, 100), score);
+		GUI.Label(new Rect(10, 10, 150, 100), score, guiStyle);
 	}
 
 	// Call other classes update difficulty method.
 	public int GetDifficulty()
 	{
 		return difflv;
+	}
+
+	public float GetScore()
+	{
+		return s;
 	}
 }

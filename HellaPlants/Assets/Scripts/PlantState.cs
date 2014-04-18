@@ -68,11 +68,22 @@ public class PlantState : MonoBehaviour
         // Soil always gradually depletes.
         soil = ValueFilter(soil, Time.deltaTime * -2f);
 
+		// If sun, water, or soil bar are at 0 then damage
+		// the plant.
+		if (sun <= 0)
+			TakeDamage (4f);
+		if (water <= 0)
+			TakeDamage (4f);
+		if (soil <= 0)
+			TakeDamage (4f);
+
         // We don't want it to replenish if it
         // has been emptied by a bug.
-        if(health > 0)
+        if (health > 0)
             // Health always gradually replenishes.
-            health = ValueFilter(health, Time.deltaTime * 1f);
+			health = ValueFilter (health, Time.deltaTime * 1f);
+		else
+			Application.LoadLevel ("Game Over");
 
         // Show visual update.
         Update3DText();
@@ -114,6 +125,7 @@ public class PlantState : MonoBehaviour
     }
 
     // Called by the BugAI script when the bug is attacking the plant.
+	// Called by this script when sun, water, or soil are at 0.
     public void TakeDamage()
     {
         health = ValueFilter(health, Time.deltaTime * -2f);
@@ -122,7 +134,7 @@ public class PlantState : MonoBehaviour
 	// Version of TakeDamage where the damage can be passed as an parameter.
 	public void TakeDamage(float damage)
 	{
-		health = ValueFilter (health, -damage);
+		health = ValueFilter (health, Time.deltaTime * -damage);
 	}
 
     // Change the plant to its next 'growth form'.

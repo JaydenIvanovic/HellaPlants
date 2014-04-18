@@ -1,23 +1,25 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Spells.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DisplayScore.cs">
     <Files>
+      <File FileName="HellaPlants.sln" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameOver.cs" Line="5" Column="2" />
+      <File FileName="Assets\Scripts\PlantState.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GestureMap.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\LoadLevelonClick.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Spells.cs" Line="93" Column="2" />
+      <File FileName="Assets\Scripts\Spells.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\DifficultyController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BugAI.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WindCollision.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\RandomWeather.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Wand.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlantState.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Timer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\HiddenMarkovModel.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UfoAI.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Gestures.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\DestoryParticleSystem.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UFOProjectile.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GestureMap.cs" Line="140" Column="30" />
-      <File FileName="Assets\Scripts\ListComparer.cs" Line="20" Column="19" />
+      <File FileName="Assets\Scripts\ListComparer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\DisplayScore.cs" Line="14" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

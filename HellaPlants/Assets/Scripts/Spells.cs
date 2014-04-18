@@ -19,7 +19,7 @@ public class Spells : MonoBehaviour
     private float secondsPassed;
 	private GameObject environment, flower;
 	private RandomWeather rw;
-    private HiddenMarkovModel hmm;
+    //private HiddenMarkovModel hmm;
 	private GestureMap gestureMap;
 
     // Use this for initialization
