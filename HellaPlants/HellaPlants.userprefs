@@ -1,12 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DisplayScore.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LoadLevelonClick.cs">
     <Files>
       <File FileName="HellaPlants.sln" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameOver.cs" Line="5" Column="2" />
+      <File FileName="Assets\Scripts\GameOver.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlantState.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GestureMap.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\LoadLevelonClick.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\LoadLevelonClick.cs" Line="5" Column="1" />
       <File FileName="Assets\Scripts\Spells.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\DifficultyController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BugAI.cs" Line="1" Column="1" />
@@ -19,7 +19,7 @@
       <File FileName="Assets\Scripts\DestoryParticleSystem.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UFOProjectile.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ListComparer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DisplayScore.cs" Line="14" Column="25" />
+      <File FileName="Assets\Scripts\DisplayScore.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
