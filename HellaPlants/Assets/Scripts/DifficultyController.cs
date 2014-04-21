@@ -9,8 +9,7 @@ public class DifficultyController : MonoBehaviour
 	public float changeDiff;
 	public GUIStyle guiStyle;
 	private string score;
-	private int difflv = 0;
-	private float current;
+	private int difflv;
 	private float timeSinceLastDiff;
 	private TextMesh scoreDisplay;
 
@@ -20,6 +19,7 @@ public class DifficultyController : MonoBehaviour
 		DontDestroyOnLoad (gameObject);
 		scr = 0;
 		s = 0;
+		difflv = 0;
 		timeSinceLastDiff = 0f;
 		scoreDisplay = GameObject.Find("Score").GetComponent<TextMesh>();
 	}
@@ -27,7 +27,7 @@ public class DifficultyController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		s = Time.time + scr;
+		s = Time.timeSinceLevelLoad + scr;
 		score = "Score: " + s.ToString ();
 
 		if (timeSinceLastDiff > changeDiff) {
