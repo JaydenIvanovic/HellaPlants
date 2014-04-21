@@ -12,13 +12,16 @@ public class DifficultyController : MonoBehaviour
 	private int difflv = 0;
 	private float current;
 	private float timeSinceLastDiff;
+	private TextMesh scoreDisplay;
 
 	// Use this for initialization
 	void Start () 
 	{
 		DontDestroyOnLoad (gameObject);
 		scr = 0;
+		s = 0;
 		timeSinceLastDiff = 0f;
+		scoreDisplay = GameObject.Find("Score").GetComponent<TextMesh>();
 	}
 	
 	// Update is called once per frame
@@ -33,12 +36,17 @@ public class DifficultyController : MonoBehaviour
 		}			
 
 		timeSinceLastDiff += Time.deltaTime;
+
+		// Using this instead of the GUI.Label as GUI.Label doesn't scale properly with android and ios.
+		scoreDisplay.text = score;
 	}
 
+	/*
 	void OnGUI() 
 	{
-		GUI.Label(new Rect(10, 10, 150, 100), score, guiStyle);
+		GUI.Label(new Rect(Screen.width * 0.01f, Screen.height * 0.01f, Screen.width * 0.3f, Screen.height * 0.3f), score, guiStyle);
 	}
+	*/
 
 	// Call other classes update difficulty method.
 	public int GetDifficulty()

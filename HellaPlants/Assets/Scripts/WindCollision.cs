@@ -28,7 +28,6 @@ public class WindCollision : MonoBehaviour
 		{
             if( Vector2.Distance(mouse, gameObject.transform.position) < 0.6) 
 			{
-				Debug.Log ("Inner if");
 				bugAI.RemoveBug (gameObject);
 				Instantiate(blood, gameObject.transform.position, gameObject.transform.rotation);
 			}

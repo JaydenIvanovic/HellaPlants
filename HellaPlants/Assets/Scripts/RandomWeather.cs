@@ -6,23 +6,27 @@ using System.Collections;
 public class RandomWeather : MonoBehaviour 
 {
     public float MAX_SECONDS;
-    public GameObject sunny, rainy;
+    public GameObject sunny, rainy, snow;
 	private GameObject weather;
+	private GameObject grassPlane;
     private float secondsPassed;
-	public enum Weather {Sunny, Rainy, Cloudy};
+	public enum Weather {Sunny, Rainy, Cloudy, Snowy};
 	private Weather currentWeather;
     private GameObject cloud1, cloud2, cloud3, cloud4;
-    private bool cloudy;
+    private bool cloudy, snowy;
     private static Color32 cloudyCol;
-	public AudioClip Rain;
-	public AudioClip Sun;
-	public AudioClip Cloud;
+	public AudioClip Rain, Sun, Cloud;
 	private AudioClip Snd;
 	private float r,s,c;
+	private Camera mainCamera;
+	public Color stormSkyCol, normalSkyCol, normalGrndCol, snowSkyCol, snowGrndCol;
 
 	// Use this for initialization
 	void Start () 
     {
+		cloudy = false;
+		snowy = false;
+
         secondsPassed = 0f;
 
         cloud1 = GameObject.Find("Cloud1");
@@ -31,6 +35,9 @@ public class RandomWeather : MonoBehaviour
         cloud4 = GameObject.Find("Cloud4");
 
         cloudyCol = new Color32(77, 77, 77, 255);
+
+		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+		grassPlane = GameObject.Find("GrassPlane");
 	}
 	
 	// Update is called once per frame
@@ -44,20 +51,24 @@ public class RandomWeather : MonoBehaviour
     // of the weather condition.
     private void GetRandomWeather()
     {
-        int rNum = Random.Range(1,4);
+        int rNum = Random.Range(1,5);
 
-        if (rNum % 3 == 0)
+        if (rNum == 1)
         {
 			SetWeather(Weather.Sunny);
         }
-        else if (rNum % 3 == 1)
+        else if (rNum == 2)
         {
 			SetWeather(Weather.Rainy);
         }
-        else if (rNum % 3 == 2)
+        else if (rNum == 3)
         {
 			SetWeather(Weather.Cloudy);
         }
+		else if (rNum == 4)
+		{
+			SetWeather(Weather.Snowy);
+		}
     }
 
     private void Sunny()
@@ -85,8 +96,17 @@ public class RandomWeather : MonoBehaviour
         cloud2.GetComponent<SpriteRenderer>().color = cloudyCol;
         cloud3.GetComponent<SpriteRenderer>().color = cloudyCol;
         cloud4.GetComponent<SpriteRenderer>().color = cloudyCol;
+		mainCamera.backgroundColor = stormSkyCol;
         cloudy = true;
     }
+
+	private void Snowy()
+	{
+		weather = (GameObject)Instantiate(snow);
+		mainCamera.backgroundColor = snowSkyCol;
+		grassPlane.GetComponent<MeshRenderer>().material.color = snowGrndCol;
+		snowy = true;
+	}
 
     private void UpdateWeatherTimer()
     {
@@ -115,6 +135,7 @@ public class RandomWeather : MonoBehaviour
 		currentWeather = w;
 		secondsPassed = 0;
 
+		// Destroy old particle system if it exists.
 		if (weather) 
 		{
 			//Destroy(AudioSource);
@@ -122,15 +143,26 @@ public class RandomWeather : MonoBehaviour
 			Destroy (weather);
 		}
 
+		// Reset to pre cloudy conditions.
         if(cloudy)
         {
             cloud1.GetComponent<SpriteRenderer>().color = Color.white;
             cloud2.GetComponent<SpriteRenderer>().color = Color.white;
             cloud3.GetComponent<SpriteRenderer>().color = Color.white;
             cloud4.GetComponent<SpriteRenderer>().color = Color.white;
+			mainCamera.backgroundColor = normalSkyCol;
             cloudy = false;
         }
 
+		// Reset to pre snowy conditions.
+		if(snowy)
+		{
+			mainCamera.backgroundColor = normalSkyCol;
+			grassPlane.GetComponent<MeshRenderer>().material.color = normalGrndCol;
+			snowy = false;
+		}
+
+		// Set the new weather.
 		if (w == Weather.Sunny)
 		{
 			Sunny ();
@@ -145,6 +177,10 @@ public class RandomWeather : MonoBehaviour
 		{
 			Cloudy ();
 			Snd = Cloud;
+		}
+		else if (w == Weather.Snowy)
+		{
+			Snowy();
 		}
 
 		if (Snd) 

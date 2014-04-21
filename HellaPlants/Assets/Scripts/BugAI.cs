@@ -37,7 +37,7 @@ public class BugAI : MonoBehaviour
 			// Check distance to plant.
 			if (CloseToPlant (plant, bug)) 
 			{
-                plant.GetComponent<PlantState>().TakeDamage();
+                plant.GetComponent<PlantState>().TakeDamage(1);
 				// Should also add to numBugsAttacking if first time its close.
 				// circlePlant
 			} 
@@ -48,7 +48,7 @@ public class BugAI : MonoBehaviour
 		}
 	}
 
-// Creates a new bug and adds it to the list.
+	// Creates a new bug and adds it to the list.
 	private void InstantiateBug()
 	{
 		int rNum = Random.Range(1,3);
@@ -61,9 +61,9 @@ public class BugAI : MonoBehaviour
 		} while((xpos < 6F && xpos > -6F) && (ypos < 3F));
 
 		if (rNum == 1)
-			bugs.Add((GameObject)Instantiate (redbug, new Vector3(xpos, ypos, 0), Quaternion.identity));
+			bugs.Add((GameObject)Instantiate (redbug, new Vector3(xpos, ypos, redbug.transform.position.z), Quaternion.identity));
 		else if (rNum == 2)
-			bugs.Add((GameObject)Instantiate (bluebug, new Vector3(xpos, ypos, 0), Quaternion.identity));
+			bugs.Add((GameObject)Instantiate (bluebug, new Vector3(xpos, ypos, bluebug.transform.position.z), Quaternion.identity));
 
 		numBugs++;
 	}
@@ -88,7 +88,7 @@ public class BugAI : MonoBehaviour
     // Checks whether the bug is close to the plant. 
 	private bool CloseToPlant(GameObject plant, GameObject bug)
 	{
-		if (Vector3.Distance (plant.transform.position, bug.transform.position) <= CLOSE_TO_PLANT)
+		if (Vector2.Distance (plant.transform.position, bug.transform.position) <= CLOSE_TO_PLANT)
 			return true; 
 		return false;
 	}

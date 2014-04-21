@@ -64,6 +64,10 @@ public class PlantState : MonoBehaviour
             sun = ValueFilter(sun, Time.deltaTime * -7f);
             water = ValueFilter(water, Time.deltaTime * -7f);
         }
+		else if (rw.GetWeather() == RandomWeather.Weather.Snowy)
+		{
+			health = ValueFilter(health, Time.deltaTime * -5f);
+		}
 
         // Soil always gradually depletes.
         soil = ValueFilter(soil, Time.deltaTime * -2f);
@@ -123,15 +127,10 @@ public class PlantState : MonoBehaviour
         // of this script.
         soil = ValueFilter(soil, 100f); 
     }
-
-    // Called by the BugAI script when the bug is attacking the plant.
-	// Called by this script when sun, water, or soil are at 0.
-    public void TakeDamage()
-    {
-        health = ValueFilter(health, Time.deltaTime * -2f);
-    }
-
+	
 	// Version of TakeDamage where the damage can be passed as an parameter.
+	// Called by this script when sun, water, or soil are at 0.
+	// Called by the BugAI script when the bug is attacking the plant.
 	public void TakeDamage(float damage)
 	{
 		health = ValueFilter (health, Time.deltaTime * -damage);
