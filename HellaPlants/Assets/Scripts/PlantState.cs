@@ -136,6 +136,12 @@ public class PlantState : MonoBehaviour
 		health = ValueFilter (health, Time.deltaTime * -damage);
 	}
 
+	// aka, not damage over time so deltaTime isn't taken into consideration.
+	public void TakePureDamage(float damage)
+	{
+		health = ValueFilter (health, -damage);
+	}
+
     // Change the plant to its next 'growth form'.
     private void Grow()
     {

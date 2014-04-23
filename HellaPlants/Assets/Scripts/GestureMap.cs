@@ -15,6 +15,7 @@ public class GestureMap
 		SetRainGestures();
 		SetFertGestures();
 		SetWindGestures();
+		SetShieldGestures();
 	}
 
 	// All the recognized sun gesture sequences.
@@ -68,6 +69,50 @@ public class GestureMap
 		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
 		                                              Gestures.direction.E, 
 		                                              Gestures.direction.SW}, 
+		               Spell.Rain);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.S, 
+		                                              Gestures.direction.E, 
+		                                              Gestures.direction.S}, 
+		               Spell.Rain);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.E, 
+		                                              Gestures.direction.S}, 
+		               Spell.Rain);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.S, 
+		                                              Gestures.direction.E, 
+		                                              Gestures.direction.SW}, 
+		               Spell.Rain);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.E, 
+		                                              Gestures.direction.S,
+													  Gestures.direction.SW}, 
+		               Spell.Rain);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.S, 
+		                                              Gestures.direction.E,
+													  Gestures.direction.SW}, 
+		               Spell.Rain);
+	    gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.S, 
+		                                              Gestures.direction.SW, 
+		                                              Gestures.direction.E,
+													  Gestures.direction.SW}, 
+		               Spell.Rain);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.E, 
+		                                              Gestures.direction.SW,
+													  Gestures.direction.S}, 
+		               Spell.Rain);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.S, 
+		                                              Gestures.direction.E,
+													  Gestures.direction.S,
+		                                              Gestures.direction.SW}, 
+		               Spell.Rain);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.S, 
+		                                              Gestures.direction.E,
+													  Gestures.direction.SW,
+		                                              Gestures.direction.S}, 
 		               Spell.Rain);
 		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE, 
 		                                              Gestures.direction.W, 
@@ -164,6 +209,12 @@ public class GestureMap
 		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE, 
 		                                              Gestures.direction.NW}, 
 		               Spell.Wind);
+	}
+
+	// All the recognized shield gesture sequences.
+	void SetShieldGestures()
+	{
+
 	}
 
 	// Get the spell corresponding to this sequence. Returns a none spell

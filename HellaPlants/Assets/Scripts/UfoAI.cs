@@ -8,47 +8,33 @@ public class UfoAI : MonoBehaviour
     private float xLoc;
     private bool isMoving;
 	private GameObject environment, plant;
+	private UfoSpawner ufoSpawner;
 	private DifficultyController diffContr;
 	public GameObject thunder;
+	private float speed;
+	private Vector3 offscreen;
 
 	// Use this for initialization
 	void Start () 
     {
-        xLoc = 0.0f;
-        isMoving = false;
-        timer = new Timer(Random.Range(1,3));
+		speed = 2.2f;
+		xLoc = Random.Range(-9, 9);
+        isMoving = true;
 		environment = GameObject.FindGameObjectWithTag("Environment");
 		plant = GameObject.Find("Flower");
+		ufoSpawner = environment.GetComponent<UfoSpawner>();
 		diffContr = environment.GetComponent<DifficultyController> ();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-	    if (timer.hitMaxTime())
-        {
-			shootBolt();
-            xLoc = Random.Range(-9, 9);
-            isMoving = true;
-            timer.resetTimer();
-            timer.setMaxSeconds(Random.Range(1, 3));
-        }
         if (isMoving)
             moveToRandomLocation();
         else
-            timer.updateTimer(Time.deltaTime); 
-
-		// Fix this to use a timer instead...
-		if(Random.Range(1, 10) == 1)
-			;//shootBolt();
+			moveOffScreen();
 	}
-
-    // Test whether the ufo should move to a different location.
-    private bool isMoveTime()
-    {
-        return false;
-    }
-
+	
     // Transform the UFO's position along the x axis to
     // some random position.
     private void moveToRandomLocation()
@@ -57,9 +43,9 @@ public class UfoAI : MonoBehaviour
         Vector3 newLocation;
 
         if (xLoc < transform.position.x)
-            x = -2.2f;
+            x = -speed;
         else
-            x = 2.2f;
+            x = speed;
 
         newLocation = new Vector3(xLoc, transform.position.y, transform.position.z);
 
@@ -69,14 +55,24 @@ public class UfoAI : MonoBehaviour
         Debug.Log(Vector3.Distance(newLocation, transform.position));
 #endif
         if (Vector3.Distance(newLocation, transform.position) <= 0.1)
+		{
             isMoving = false;
+			shootBolt();
+			offscreen = ufoSpawner.getRandomSpawnPoint();
+		}
     }
 
+	// Move the ufo offscreen as its fired the bullet.
+	private void moveOffScreen()
+	{
+		transform.position = Vector3.MoveTowards(transform.position, offscreen, Time.deltaTime * speed);
+	}
+	
 	// Shoot a bullet in the direction of the plant.
 	private void shootBolt()
 	{
 		Vector3 dirToPlant = Vector3.Normalize(plant.transform.position - transform.position);
 		GameObject newBolt = (GameObject)Instantiate (thunder, transform.position, transform.rotation);
 		newBolt.GetComponent<UFOProjectile>().SetDirection(dirToPlant);
-	}
+	}	
 }

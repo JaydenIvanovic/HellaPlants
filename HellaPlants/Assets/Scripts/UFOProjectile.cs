@@ -35,7 +35,7 @@ public class UFOProjectile : MonoBehaviour
 	{
 		if (collision.gameObject.name == "Flower") 
 		{
-			plantState.TakeDamage(5f);
+			plantState.TakePureDamage(100f);
 			Destroy (gameObject);
 		}
 	}
