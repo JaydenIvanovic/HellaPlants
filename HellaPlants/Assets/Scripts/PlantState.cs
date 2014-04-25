@@ -22,7 +22,7 @@ public class PlantState : MonoBehaviour
 		health = 100;
 		soil = 100;
 		water = 100;
-		sun = 100;	
+		sun = 100;
 	}
 	
     void Start()
@@ -31,6 +31,7 @@ public class PlantState : MonoBehaviour
         rw = environ.GetComponent<RandomWeather>();
 		diffContr = environ.GetComponent<DifficultyController> ();
         spriteR = GetComponent<SpriteRenderer>();
+
         growthTimer = new Timer(growthSecs);
         growthLevel = 0;
     }
@@ -51,18 +52,18 @@ public class PlantState : MonoBehaviour
 		// Check the weather.
         if (rw.GetWeather() == RandomWeather.Weather.Sunny)
         {
-			sun = ValueFilter(sun, Time.deltaTime * 5f);
+			sun = ValueFilter(sun, Time.deltaTime * 5.5f);
 			water = ValueFilter(water, Time.deltaTime * -4f);
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Rainy)
         {
             sun = ValueFilter(sun, Time.deltaTime * -4f);
-            water = ValueFilter(water, Time.deltaTime * 5f);
+            water = ValueFilter(water, Time.deltaTime * 5.5f);
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Cloudy)
         {
-            sun = ValueFilter(sun, Time.deltaTime * -7f);
-            water = ValueFilter(water, Time.deltaTime * -7f);
+            sun = ValueFilter(sun, Time.deltaTime * -5f);
+            water = ValueFilter(water, Time.deltaTime * -5f);
         }
 		else if (rw.GetWeather() == RandomWeather.Weather.Snowy)
 		{
@@ -103,6 +104,12 @@ public class PlantState : MonoBehaviour
         plantVarTxt.transform.Find("WaterLevelsText").GetComponent<TextMesh>().text = "Water: " + Mathf.Round(water) + "%";
         plantVarTxt.transform.Find("SoilLevelsText").GetComponent<TextMesh>().text = "Soil: " + Mathf.Round(soil) + "%";
         plantVarTxt.transform.Find("SunLevelsText").GetComponent<TextMesh>().text = "Sun: " + Mathf.Round(sun) + "%";
+
+        /*Update bars*/
+        plantVarTxt.transform.Find("SunBar").GetComponent<HealthBar>().updateDisplay(sun / 100);
+        plantVarTxt.transform.Find("WaterBar").GetComponent<HealthBar>().updateDisplay(water / 100);
+        plantVarTxt.transform.Find("SoilBar").GetComponent<HealthBar>().updateDisplay(soil / 100);
+        plantVarTxt.transform.Find("HealthBar").GetComponent<HealthBar>().updateDisplay(health / 100);
     }
 
     // Ensure that the number is always between 0 and 100.

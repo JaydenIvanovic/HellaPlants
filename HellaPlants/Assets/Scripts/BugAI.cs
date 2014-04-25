@@ -76,8 +76,8 @@ public class BugAI : MonoBehaviour
 
         if (attackTimer.hitMaxTime())
         {
-			maxSpwnRate = Mathf.Pow(10, -diff.GetDifficulty() * 0.1f);
-			minSpwnRate = Mathf.Pow(2, -diff.GetDifficulty() * 0.1f);
+			maxSpwnRate = 5  * (Mathf.Pow(10, -diff.GetDifficulty() * 0.1f));
+			minSpwnRate = 5 * (Mathf.Pow(2, -diff.GetDifficulty() * 0.1f));
 
             InstantiateBug();
             attackTimer.setMaxSeconds(Random.Range(minSpwnRate, maxSpwnRate));
