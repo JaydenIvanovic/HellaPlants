@@ -1,4 +1,4 @@
-﻿//#define SPELLSDEBUG
+//#define SPELLSDEBUG
 
 using UnityEngine;
 using System.Collections;
@@ -13,9 +13,9 @@ using System.Runtime.InteropServices;
  */
 public class Spells : MonoBehaviour 
 {
-    public GameObject rain, fertilizer, wind, sun;
+    public GameObject fertilizer, wind, shield;
     public float MAX_SECONDS;
-    private GameObject rain_i, fertilizer_i, wind_i, sun_i;
+    private GameObject fertilizer_i, wind_i, shield_i;
     private float secondsPassed;
 	private GameObject environment, flower;
 	private RandomWeather rw;
@@ -49,7 +49,7 @@ public class Spells : MonoBehaviour
 	public void setGesture(List<Gestures.direction> dirList)
 	{
 		GestureMap.Spell spell = gestureMap.GetSpell (dirList);
-#if GESTURESDEBUG
+#if SPELLSDEBUG
 		Debug.Log (spell);
 #endif
 		switch (spell) 
@@ -76,16 +76,22 @@ public class Spells : MonoBehaviour
 				}
 				break;
 			case GestureMap.Spell.Shield:
+				if (!shield_i)
+				{
+					if (TimedSpellInProgress())
+						Reset();
+					shield_i = (GameObject)Instantiate(shield);
+				}
 				break;
 			default:
 				break;
 		}
 	
-        // Cast fireball.
+        /* //Cast fireball.
         if (dirList.Count == 1 && (dirList[0] == Gestures.direction.N))
         {
             GetComponent<Wand>().castFireball();
-        }
+        }*/
 #if GESTURESDEBUG 
         // Debug.Log(hmm.classifySequence(dirList));
 #endif
@@ -98,20 +104,16 @@ public class Spells : MonoBehaviour
         if (fertilizer_i)
             Destroy(fertilizer_i);
 
-        if (rain_i)
-            Destroy(rain_i);
-
         if (wind_i)
             Destroy(wind_i);
 
-        if (sun_i)
-            Destroy(sun_i);
+		if (shield_i)
+			Destroy(shield_i);
 
         secondsPassed = 0f;
         fertilizer_i = null;
-        rain_i = null;
         wind_i = null;
-        sun_i = null;
+		shield_i = null;
     }
  
 
@@ -137,22 +139,11 @@ public class Spells : MonoBehaviour
     }
 
 
-    // Check if a weather condition has been cast and is playing out.
-    // Fertilizer is not included. It doesn't need to be timed it handles 
-    // its own destruction.
+    // Check if wind or shield has been cast.
     private bool TimedSpellInProgress()
     {
-        if (wind_i || rain_i || sun_i)
+        if (wind_i || shield_i)
             return true;
         return false;
-    }
-
-
-    // Check if any spell is currently in progress.
-    private bool SpellInProgress()
-    {
-        if (TimedSpellInProgress() || fertilizer_i)
-            return true;
-        return false;
-    }
+    }	
 }

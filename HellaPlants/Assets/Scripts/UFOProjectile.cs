@@ -7,13 +7,15 @@ public class UFOProjectile : MonoBehaviour
 	private float acceleration;
 	private DifficultyController diffContr;
 	private PlantState plantState;
+	private GameObject explosion;
 
 	// Use this for initialization
 	void Start () 
 	{
 		diffContr = GameObject.Find("Environment").GetComponent<DifficultyController>();
 		plantState = GameObject.Find ("Flower").GetComponent<PlantState> ();
-		acceleration = (float)(diffContr.GetDifficulty() * 0.1 + 2);
+		explosion = (GameObject)Resources.Load("Explosion");
+		acceleration = (float)(diffContr.GetDifficulty() * 0.4 + 2);
 	}
 	
 	// Update is called once per frame
@@ -38,5 +40,12 @@ public class UFOProjectile : MonoBehaviour
 			plantState.TakePureDamage(100f);
 			Destroy (gameObject);
 		}
+	}
+
+	// User hit it so destroy it...
+	void OnMouseDown()
+	{
+		Destroy(gameObject);
+		Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
 	}
 }

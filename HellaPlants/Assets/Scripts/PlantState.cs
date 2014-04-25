@@ -12,7 +12,6 @@ public class PlantState : MonoBehaviour
 	private DifficultyController diffContr;
     private SpriteRenderer spriteR;
 	private GameObject environ;
-    private Timer growthTimer;
     private uint growthLevel;
     public Sprite f1, f2, f3, f4, f5;
 
@@ -31,8 +30,6 @@ public class PlantState : MonoBehaviour
         rw = environ.GetComponent<RandomWeather>();
 		diffContr = environ.GetComponent<DifficultyController> ();
         spriteR = GetComponent<SpriteRenderer>();
-
-        growthTimer = new Timer(growthSecs);
         growthLevel = 0;
     }
 
@@ -40,13 +37,6 @@ public class PlantState : MonoBehaviour
 	void Update () 
 	{
         // Handle plant growth.
-		/*
-        growthTimer.updateTimer(Time.deltaTime);
-        if (growthTimer.hitMaxTime())
-        {
-            Grow();
-            growthTimer.resetTimer();
-        }*/
 		Grow ();
 
 		// Check the weather.
@@ -67,7 +57,7 @@ public class PlantState : MonoBehaviour
         }
 		else if (rw.GetWeather() == RandomWeather.Weather.Snowy)
 		{
-			health = ValueFilter(health, Time.deltaTime * -5f);
+			health = ValueFilter(health, Time.deltaTime * -8f);
 		}
 
         // Soil always gradually depletes.

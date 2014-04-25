@@ -66,6 +66,11 @@ public class UfoAI : MonoBehaviour
 	private void moveOffScreen()
 	{
 		transform.position = Vector3.MoveTowards(transform.position, offscreen, Time.deltaTime * speed);
+		if(Vector3.Distance(offscreen, transform.position) <= 0.1)
+		{
+			Destroy(gameObject);
+			ufoSpawner.continueTimer();
+		}
 	}
 	
 	// Shoot a bullet in the direction of the plant.

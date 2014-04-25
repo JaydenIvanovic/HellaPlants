@@ -6,18 +6,23 @@ public class UfoSpawner : MonoBehaviour
 	public GameObject leftSpawnPoint, rightSpawnPoint;
 	public GameObject ufo;
 	private Timer t;
+	private bool canUpdate;
 
 	void Start ()
 	{
-		t = new Timer(Random.Range(10,60));
+		t = new Timer(Random.Range(10,30));
+		canUpdate = true;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-		t.updateTimer(Time.deltaTime);
+		if(canUpdate)
+			t.updateTimer(Time.deltaTime);
+
 		if(t.hitMaxTime())
 		{
+			canUpdate = false;
 			Instantiate(ufo, getRandomSpawnPoint(), Quaternion.identity);
 			t.resetTimer();
 		}
@@ -32,5 +37,11 @@ public class UfoSpawner : MonoBehaviour
 			return leftSpawnPoint.transform.position;
 		else
 			return rightSpawnPoint.transform.position;
+	}
+
+	// Reset the timer now the UFO has moved offscreen.
+	public void continueTimer()
+	{
+		canUpdate = true;
 	}
 }

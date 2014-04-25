@@ -214,7 +214,107 @@ public class GestureMap
 	// All the recognized shield gesture sequences.
 	void SetShieldGestures()
 	{
-
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W, 
+		                                              Gestures.direction.SW,
+													  Gestures.direction.S,
+		                                              Gestures.direction.SE,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W,
+		                                              Gestures.direction.NW}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W, 
+		                                              Gestures.direction.S,
+													  Gestures.direction.SE,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W,
+		                                              Gestures.direction.N}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.N, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.S,
+		                                              Gestures.direction.E,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W,
+		                                              Gestures.direction.N}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NW, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.S,
+		                                              Gestures.direction.SE,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W,
+		                                              Gestures.direction.NW}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NW, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.S,
+		                                              Gestures.direction.SE,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W, 
+		                                              Gestures.direction.SE,
+													  Gestures.direction.S,
+		                                              Gestures.direction.W,
+		                                              Gestures.direction.NW}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W, 
+		                                              Gestures.direction.S,
+													  Gestures.direction.SE,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W, 
+		                                              Gestures.direction.S,
+													  Gestures.direction.E,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.N, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.S,
+		                                              Gestures.direction.SE,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.SW,
+		                                              Gestures.direction.W,
+													  Gestures.direction.NW,
+		                                              Gestures.direction.N}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.N, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.S,
+		                                              Gestures.direction.E,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W,
+		                                              Gestures.direction.NW}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.N, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.S,
+		                                              Gestures.direction.E,
+		                                              Gestures.direction.SE,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W,
+		                                              Gestures.direction.NW,
+		                                              Gestures.direction.N}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.N, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.S,
+		                                              Gestures.direction.SE,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W,
+		                                              Gestures.direction.NW}, 
+		               Spell.Shield);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.N, 
+		                                              Gestures.direction.W,
+													  Gestures.direction.S,
+		                                              Gestures.direction.SE,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W,
+		                                              Gestures.direction.NW,
+		                                              Gestures.direction.N}, 
+		               Spell.Shield);
 	}
 
 	// Get the spell corresponding to this sequence. Returns a none spell
