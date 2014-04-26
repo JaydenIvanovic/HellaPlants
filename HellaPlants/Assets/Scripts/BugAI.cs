@@ -13,7 +13,8 @@ public class BugAI : MonoBehaviour
 	private const float CLOSE_TO_PLANT = 1.5f;
 	private int numBugs = 0;
     private Timer attackTimer;
-    public float initalSpwnRate, minSpwnRate, maxSpwnRate;
+	public float initalSpwnRate;
+	private float minSpwnRate, maxSpwnRate;
 	public AudioClip squash;
 	private DifficultyController diff;
 	private GameObject environment;
@@ -38,7 +39,7 @@ public class BugAI : MonoBehaviour
 			// Check distance to plant.
 			if (CloseToPlant (plant, bug)) 
 			{
-                plant.GetComponent<PlantState>().TakeDamage(2);
+                plant.GetComponent<PlantState>().TakeDamage(4 + diff.GetDifficulty());
 			} 
 			else 
 			{
@@ -78,11 +79,11 @@ public class BugAI : MonoBehaviour
 
         if (attackTimer.hitMaxTime())
         {
-			float max = 5  * (Mathf.Pow(2, -diff.GetDifficulty() * 0.4f)); 
-			float min = 5 * (Mathf.Pow(10, -diff.GetDifficulty() * 0.4f)); 
+			float max = initalSpwnRate  * (Mathf.Pow(2, -diff.GetDifficulty() * 0.5f)); 
+			float min = initalSpwnRate * (Mathf.Pow(10, -diff.GetDifficulty() * 0.5f)); 
 
-			maxSpwnRate = Mathf.Clamp(max, 0.8f, 5f);
-			minSpwnRate = Mathf.Clamp(min, 0.5f, 5f);
+			maxSpwnRate = Mathf.Clamp(max, 0.5f, initalSpwnRate);
+			minSpwnRate = Mathf.Clamp(min, 0.5f, initalSpwnRate);
 
             InstantiateBug();
             attackTimer.setMaxSeconds(Random.Range(minSpwnRate, maxSpwnRate));
