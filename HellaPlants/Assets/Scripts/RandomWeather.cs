@@ -15,8 +15,8 @@ public class RandomWeather : MonoBehaviour
     private GameObject cloud1, cloud2, cloud3, cloud4;
     private bool cloudy, snowy;
     private static Color32 cloudyCol;
-	public AudioClip Rain, Sun, Cloud;
-	private AudioClip Snd;
+	public AudioClip rainSnd, sunSnd, cloudSnd, snowSnd;
+	private AudioClip snd;
 	private float r,s,c;
 	private Camera mainCamera;
 	public Color stormSkyCol, normalSkyCol, normalGrndCol, snowSkyCol, snowGrndCol;
@@ -38,6 +38,8 @@ public class RandomWeather : MonoBehaviour
 
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		grassPlane = GameObject.Find("GrassPlane");
+
+		GetRandomWeather();
 	}
 	
 	// Update is called once per frame
@@ -166,28 +168,29 @@ public class RandomWeather : MonoBehaviour
 		if (w == Weather.Sunny)
 		{
 			Sunny ();
-			Snd = Sun;
+			snd = sunSnd;
 		}
 		else if (w == Weather.Rainy) 
 		{
 			Rainy ();
-			Snd = Rain;
+			snd = rainSnd;
 		}
 		else if (w == Weather.Cloudy)
 		{
 			Cloudy ();
-			Snd = Cloud;
+			snd = cloudSnd;
 		}
 		else if (w == Weather.Snowy)
 		{
 			Snowy();
+			snd = snowSnd;
 		}
 
-		if (Snd) 
+		if (snd) 
 		{
 			Destroy(GameObject.Find("One shot audio"));
+			AudioSource.PlayClipAtPoint(snd, transform.position,100F);
 		}
-		AudioSource.PlayClipAtPoint(Snd, transform.position,100F);
 		//Snd.SetScheduledEndTime (3);
 	}
 }

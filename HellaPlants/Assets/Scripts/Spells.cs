@@ -13,13 +13,12 @@ using System.Runtime.InteropServices;
  */
 public class Spells : MonoBehaviour 
 {
-    public GameObject fertilizer, wind, shield;
+    public GameObject fertilizer, wind, shield, placeholder;
     public float MAX_SECONDS;
-    private GameObject fertilizer_i, wind_i, shield_i;
+    private GameObject fertilizer_i, wind_i;
     private float secondsPassed;
 	private GameObject environment, flower;
 	private RandomWeather rw;
-    //private HiddenMarkovModel hmm;
 	private GestureMap gestureMap;
 
     // Use this for initialization
@@ -28,7 +27,6 @@ public class Spells : MonoBehaviour
 		environment = GameObject.FindGameObjectWithTag ("Environment");
         flower = GameObject.Find("Flower");
 		rw = environment.GetComponent<RandomWeather> ();
-        //hmm = new HiddenMarkovModel();
         secondsPassed = 0f;
 		gestureMap = new GestureMap ();
         Reset();
@@ -75,13 +73,9 @@ public class Spells : MonoBehaviour
 					wind_i = (GameObject)Instantiate(wind);
 				}
 				break;
-			case GestureMap.Spell.Shield:
-				if (!shield_i)
-				{
-					if (TimedSpellInProgress())
-						Reset();
-					shield_i = (GameObject)Instantiate(shield);
-				}
+			case GestureMap.Spell.Misc:
+				Debug.Log ("Random Event!");
+				Instantiate(placeholder);
 				break;
 			default:
 				break;
@@ -107,13 +101,9 @@ public class Spells : MonoBehaviour
         if (wind_i)
             Destroy(wind_i);
 
-		if (shield_i)
-			Destroy(shield_i);
-
         secondsPassed = 0f;
         fertilizer_i = null;
         wind_i = null;
-		shield_i = null;
     }
  
 
@@ -142,7 +132,7 @@ public class Spells : MonoBehaviour
     // Check if wind or shield has been cast.
     private bool TimedSpellInProgress()
     {
-        if (wind_i || shield_i)
+        if (wind_i)
             return true;
         return false;
     }	

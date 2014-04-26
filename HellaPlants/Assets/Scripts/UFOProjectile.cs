@@ -8,6 +8,8 @@ public class UFOProjectile : MonoBehaviour
 	private DifficultyController diffContr;
 	private PlantState plantState;
 	private GameObject explosion;
+	public AudioClip shootSnd, explosionSnd;
+	private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () 
@@ -15,6 +17,8 @@ public class UFOProjectile : MonoBehaviour
 		diffContr = GameObject.Find("Environment").GetComponent<DifficultyController>();
 		plantState = GameObject.Find ("Flower").GetComponent<PlantState> ();
 		explosion = (GameObject)Resources.Load("Explosion");
+		audioSource = GameObject.Find("Environment").GetComponent<AudioSource>();
+		audioSource.PlayOneShot(shootSnd);
 		acceleration = (float)(diffContr.GetDifficulty() * 0.4 + 2);
 	}
 	
@@ -37,6 +41,7 @@ public class UFOProjectile : MonoBehaviour
 	{
 		if (collision.gameObject.name == "Flower") 
 		{
+			audioSource.PlayOneShot(explosionSnd);
 			plantState.TakePureDamage(100f);
 			Destroy (gameObject);
 		}
@@ -46,6 +51,7 @@ public class UFOProjectile : MonoBehaviour
 	void OnMouseDown()
 	{
 		Destroy(gameObject);
+		audioSource.PlayOneShot(explosionSnd);
 		Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
 	}
 }

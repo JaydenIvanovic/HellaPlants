@@ -14,14 +14,15 @@ public class BugAI : MonoBehaviour
 	private int numBugs = 0;
     private Timer attackTimer;
     public float initalSpwnRate, minSpwnRate, maxSpwnRate;
-	public AudioClip sq;
+	public AudioClip squash;
 	private DifficultyController diff;
-	private GameObject d;
+	private GameObject environment;
+
 	// Use this for initialization
 	void Start () 
 	{
-		d = GameObject.FindGameObjectWithTag ("Environment");
-		diff = d.GetComponent<DifficultyController> ();
+		environment = GameObject.FindGameObjectWithTag ("Environment");
+		diff = environment.GetComponent<DifficultyController> ();
         bugs = new List<GameObject>();
         attackTimer = new Timer(initalSpwnRate);
 	}
@@ -110,16 +111,9 @@ public class BugAI : MonoBehaviour
     // away by the wind.
     public void RemoveBug(GameObject bug)
     {
-		audio.PlayOneShot (sq);
+		audio.PlayOneShot (squash);
         bugs.Remove(bug);
         Destroy(bug);
 		(diff.scr) += 10;
-    }
-
-
-    // To be called by the difficulty manager.
-    public void UpdateSpawnRate()
-    {
-
     }
 }
