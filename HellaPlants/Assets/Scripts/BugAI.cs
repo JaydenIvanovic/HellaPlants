@@ -38,9 +38,7 @@ public class BugAI : MonoBehaviour
 			// Check distance to plant.
 			if (CloseToPlant (plant, bug)) 
 			{
-                plant.GetComponent<PlantState>().TakeDamage(1);
-				// Should also add to numBugsAttacking if first time its close.
-				// circlePlant
+                plant.GetComponent<PlantState>().TakeDamage(2);
 			} 
 			else 
 			{
@@ -55,11 +53,14 @@ public class BugAI : MonoBehaviour
 		int rNum = Random.Range(1,3);
 		float xpos;
 		float ypos;
-
+		
 		do {
 			xpos = Random.Range (-14F, 14F); 
 			ypos = Random.Range (-6F, 4F); 
-		} while((xpos < 6F && xpos > -6F) && (ypos < 3F));
+		} while((xpos < 6F && xpos > -6F) && (ypos < 3F)); 
+
+		xpos = Random.Range (-14F, 14F); 
+		ypos = Random.Range (-6F, 4F); 
 
 		if (rNum == 1)
 			bugs.Add((GameObject)Instantiate (redbug, new Vector3(xpos, ypos, redbug.transform.position.z), Quaternion.identity));
@@ -77,8 +78,11 @@ public class BugAI : MonoBehaviour
 
         if (attackTimer.hitMaxTime())
         {
-			maxSpwnRate = 5  * (Mathf.Pow(10, -diff.GetDifficulty() * 0.1f));
-			minSpwnRate = 5 * (Mathf.Pow(2, -diff.GetDifficulty() * 0.1f));
+			float max = 5  * (Mathf.Pow(2, -diff.GetDifficulty() * 0.4f)); 
+			float min = 5 * (Mathf.Pow(10, -diff.GetDifficulty() * 0.4f)); 
+
+			maxSpwnRate = Mathf.Clamp(max, 0.8f, 5f);
+			minSpwnRate = Mathf.Clamp(min, 0.5f, 5f);
 
             InstantiateBug();
             attackTimer.setMaxSeconds(Random.Range(minSpwnRate, maxSpwnRate));

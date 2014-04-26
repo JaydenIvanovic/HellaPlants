@@ -288,6 +288,10 @@ public class GestureMap
 		                                              Gestures.direction.SW}, 
 		               Spell.Misc);
 		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.E,
+													  Gestures.direction.NW,
+		                                              Gestures.direction.S}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.E,
 													  Gestures.direction.N,
 		                                              Gestures.direction.SW,
 													  Gestures.direction.S}, 
@@ -307,6 +311,60 @@ public class GestureMap
 													  Gestures.direction.NW,
 		                                              Gestures.direction.N,
 													  Gestures.direction.SW,
+		                                              Gestures.direction.S}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE,
+													  Gestures.direction.N,
+		                                              Gestures.direction.E,
+													  Gestures.direction.S,
+		                                              Gestures.direction.W}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE,
+													  Gestures.direction.N,
+		                                              Gestures.direction.S,
+													  Gestures.direction.SW,
+		                                              Gestures.direction.W}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE,
+													  Gestures.direction.N,
+		                                              Gestures.direction.SE,
+													  Gestures.direction.S,
+		                                              Gestures.direction.W}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE,
+													  Gestures.direction.N,
+		                                              Gestures.direction.S,
+		                                              Gestures.direction.W}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W,
+													  Gestures.direction.N,
+		                                              Gestures.direction.NE,
+		                                              Gestures.direction.S}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W,
+													  Gestures.direction.N,
+		                                              Gestures.direction.NE,
+		                                              Gestures.direction.SE,
+		                                              Gestures.direction.S}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W,
+													  Gestures.direction.N,
+		                                              Gestures.direction.SE,
+		                                              Gestures.direction.S}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W,
+		                                              Gestures.direction.NE,
+		                                              Gestures.direction.S}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W,
+													  Gestures.direction.NE,
+		                                              Gestures.direction.N,
+		                                              Gestures.direction.SE,
+		                                              Gestures.direction.S}, 
+		               Spell.Misc);
+		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.W,
+													  Gestures.direction.NE,
+		                                              Gestures.direction.SE,
 		                                              Gestures.direction.S}, 
 		               Spell.Misc);
 	}

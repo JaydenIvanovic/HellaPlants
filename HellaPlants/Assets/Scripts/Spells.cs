@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
  */
 public class Spells : MonoBehaviour 
 {
-    public GameObject fertilizer, wind, shield, placeholder;
+    public GameObject fertilizer, wind, shield;
     public float MAX_SECONDS;
     private GameObject fertilizer_i, wind_i;
     private float secondsPassed;
@@ -74,8 +74,11 @@ public class Spells : MonoBehaviour
 				}
 				break;
 			case GestureMap.Spell.Misc:
-				Debug.Log ("Random Event!");
-				Instantiate(placeholder);
+				if (!fertilizer_i)
+				{
+					fertilizer_i = (GameObject)Instantiate(fertilizer);
+					flower.GetComponent<PlantState>().IncreaseSoil();
+				}
 				break;
 			default:
 				break;
