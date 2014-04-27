@@ -3,9 +3,23 @@ using System.Collections;
 
 public class GameOver : MonoBehaviour 
 {
-	void OnMouseDown () 
+	private bool canContinue;
+
+	void Start()
 	{
-		if (Input.GetMouseButton (0))
+		canContinue = false;
+		StartCoroutine(DelayContinueButton());
+	}
+
+	void Update() 
+	{
+		if (Input.GetMouseButton (0) && canContinue)
 			Application.LoadLevel ("Scene1");
+	}
+
+	private IEnumerator DelayContinueButton()
+	{
+		yield return new WaitForSeconds(2);
+		canContinue = true;
 	}
 }

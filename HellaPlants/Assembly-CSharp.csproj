@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BugAI.cs" />
+     <Compile Include="Assets\Scripts\DestoryGameObject.cs" />
      <Compile Include="Assets\Scripts\DestoryParticleSystem.cs" />
      <Compile Include="Assets\Scripts\DifficultyController.cs" />
      <Compile Include="Assets\Scripts\DisplayScore.cs" />
@@ -56,8 +57,10 @@
      <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\ListComparer.cs" />
      <Compile Include="Assets\Scripts\LoadLevelonClick.cs" />
+     <Compile Include="Assets\Scripts\PauseGamePrefab.cs" />
      <Compile Include="Assets\Scripts\PlantState.cs" />
      <Compile Include="Assets\Scripts\RandomWeather.cs" />
+     <Compile Include="Assets\Scripts\SceneSwitch.cs" />
      <Compile Include="Assets\Scripts\Spells.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\UFOProjectile.cs" />
