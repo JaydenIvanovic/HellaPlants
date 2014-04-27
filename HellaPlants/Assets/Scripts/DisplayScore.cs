@@ -9,12 +9,12 @@ public class DisplayScore : MonoBehaviour {
 	void Start()
 	{
 		// Get the score from the previous scenes environment object.
-		GameObject environment = GameObject.Find ("Environment");
-		score = environment.GetComponent<DifficultyController>().GetScore();
-		Destroy (environment);
+		//GameObject environment = GameObject.Find ("Environment");
+		//score = environment.GetComponent<DifficultyController>().GetScore();
+		//Destroy (environment);
 
 		// Display score in this game objects text mesh.
 		textMesh = GetComponent<TextMesh> ();
-		textMesh.text = "Score: " + score;
+		textMesh.text = "Score: " + DifficultyController.GetScore();
 	}
 }
