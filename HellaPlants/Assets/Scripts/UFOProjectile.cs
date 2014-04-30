@@ -15,7 +15,7 @@ public class UFOProjectile : MonoBehaviour
 	void Start () 
 	{
 		diffContr = GameObject.Find("Environment").GetComponent<DifficultyController>();
-		plantState = GameObject.Find ("Flower").GetComponent<PlantState> ();
+		plantState = GameObject.Find ("Flower").GetComponent<PlantState> (); 
 		explosion = (GameObject)Resources.Load("Explosion");
 		audioSource = GameObject.Find("Environment").GetComponent<AudioSource>();
 		audioSource.PlayOneShot(shootSnd);
@@ -30,6 +30,7 @@ public class UFOProjectile : MonoBehaviour
 			Destroy (gameObject);
 
 		transform.position += Time.deltaTime * movingDirection * acceleration;
+		transform.LookAt(transform.position + new Vector3(0,0,1), plantState.transform.position  - transform.position);
 	}
 
 	public void SetDirection(Vector3 direction)
