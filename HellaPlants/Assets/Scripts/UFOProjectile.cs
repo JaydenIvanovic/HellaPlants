@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Script to be attached to the UFO's projectile
+// prefab. The projectile handles its own logic.
 public class UFOProjectile : MonoBehaviour 
 {
 	private Vector3 movingDirection;
@@ -33,11 +35,14 @@ public class UFOProjectile : MonoBehaviour
 		transform.LookAt(transform.position + new Vector3(0,0,1), plantState.transform.position  - transform.position);
 	}
 
+	// Set the direction which the projectile should move in.
 	public void SetDirection(Vector3 direction)
 	{
 		movingDirection = direction;
 	}
 
+	// A collision event occurred so we need to check if 
+	// the flower was hit.
 	void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.name == "Flower") 

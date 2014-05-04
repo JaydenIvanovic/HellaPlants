@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Handles the displaying of different UI bars
+// including sun, water, soil and health.
 public class HealthBar : MonoBehaviour
 {
     public float barDisplay; //current progress
@@ -21,11 +23,6 @@ public class HealthBar : MonoBehaviour
         GUI.Box(new Rect(0, 0, size.x, size.y), fullTex, style);
         GUI.EndGroup();
         GUI.EndGroup();
-    }
-
-    void Update()
-    {
-
     }
 
     /*Pass a number between 0 and 1 */

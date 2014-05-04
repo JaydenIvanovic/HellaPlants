@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+// Not used in the current game. Was way to messy...
 public class Wand : MonoBehaviour 
 {
     public GameObject fireball;

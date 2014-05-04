@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Representation of the plants current state.
+// How much water, sunlight, soil and health it has,
+// the sprite which represents its current growth state etc.
 public class PlantState : MonoBehaviour 
 {
 	private float health {get;set;}

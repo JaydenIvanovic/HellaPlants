@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Keeps track of the current difficulty and increases it
+// at the interval set by changeDiff. Also keeps track of
+// the players score, although this should probably be moved
+// to another class.
 public class DifficultyController : MonoBehaviour 
 {
 	private int numBugs;
@@ -29,7 +33,9 @@ public class DifficultyController : MonoBehaviour
 		score = Time.timeSinceLevelLoad + scr;
 		scoreStr = "Score: " + score.ToString ();
 
-		if (timeSinceLastDiff > changeDiff) {
+		// Time to change the difficulty.
+		if (timeSinceLastDiff > changeDiff) 
+		{
 			difflv++;
 			timeSinceLastDiff = 0;
 		}			
@@ -47,12 +53,14 @@ public class DifficultyController : MonoBehaviour
 	}
 	*/
 
-	// Call other classes update difficulty method.
+	// Other classes can use this to query the current difficulty
+	// and act accordingly.
 	public int GetDifficulty()
 	{
 		return difflv;
 	}
 
+	// Return the players score.
 	public static float GetScore()
 	{
 		return score;

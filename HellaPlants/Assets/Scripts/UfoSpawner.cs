@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Handles the spawning of the UFO which
+// randomly appears and shoots projectiles at the flower.
 public class UfoSpawner : MonoBehaviour 
 {
 	public GameObject leftSpawnPoint, rightSpawnPoint;
@@ -40,6 +42,7 @@ public class UfoSpawner : MonoBehaviour
 	}
 
 	// Reset the timer now the UFO has moved offscreen.
+	// Will be called by the UfoAI script.
 	public void continueTimer()
 	{
 		canUpdate = true;
