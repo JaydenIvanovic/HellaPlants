@@ -20,7 +20,7 @@ public class GameOver : MonoBehaviour
 	void Update() 
 	{
 		if (Input.GetMouseButton (0) && canContinue)
-			Application.LoadLevel ("Scene1");
+			Application.LoadLevel ("MainGame");
 	}
 
 	private IEnumerator DelayContinueButton()

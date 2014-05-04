@@ -81,7 +81,7 @@ public class PlantState : MonoBehaviour
             // Health always gradually replenishes.
 			health = ValueFilter (health, Time.deltaTime * 1f);
 		else
-			Application.LoadLevel ("Game Over");
+			Application.LoadLevel ("GameOver");
 
         // Show visual update.
         Update3DText();
