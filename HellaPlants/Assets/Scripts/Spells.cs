@@ -6,9 +6,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 
-/* 
- * Script which handles the user casting spells.
- */
+// Script which handles the user casting spells.
 public class Spells : MonoBehaviour 
 {
     public GameObject fertilizer, wind, shield;

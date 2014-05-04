@@ -5,7 +5,7 @@ using System.Collections;
 
 // This script should be attached to the Environment game object.
 // It handles the random selection of weather every MAX_SECONDS
-// and the setting of weather (visual/audial representation).
+// and the displaying of weather (visual/audial representation).
 public class RandomWeather : MonoBehaviour 
 {
     public float MAX_SECONDS;
