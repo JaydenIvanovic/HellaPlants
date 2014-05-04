@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+// Deciphers the gesture sequence from the players input.
 public class Gestures : MonoBehaviour {
 
 	private struct swipe{
@@ -42,6 +43,8 @@ public class Gestures : MonoBehaviour {
 		}
 	}
 
+	// Determines the gesture sequence, calling setGesture
+	// of the Spells class to cast the appropriate spell.
 	private void decipherGesture()
 	{
 
@@ -125,6 +128,8 @@ public class Gestures : MonoBehaviour {
 		spells.setGesture (filteredData);
 	}
 
+	// Returns the direction as interpreted by the angle between
+	// two vectors.
 	private direction findDirection(Vector2 start, Vector2 end)
 	{
 		float xChange = end.x - start.x;

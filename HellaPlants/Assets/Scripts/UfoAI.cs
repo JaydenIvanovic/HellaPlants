@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Handles the UFO's behaviour. The UFO simply
+// enters the scene, moves to random position, fires
+// a projectile and then exits the scene.
 public class UfoAI : MonoBehaviour 
 {
     private Timer timer;
@@ -42,6 +45,7 @@ public class UfoAI : MonoBehaviour
         float x;
         Vector3 newLocation;
 
+		// Moving left or right.
         if (xLoc < transform.position.x)
             x = -speed;
         else
@@ -49,11 +53,14 @@ public class UfoAI : MonoBehaviour
 
         newLocation = new Vector3(xLoc, transform.position.y, transform.position.z);
 
+		// Speed of movement is dependent on current difficulty.
         transform.position += new Vector3(Time.deltaTime * x * (float)(diffContr.GetDifficulty() * 0.1 + 1), 0, 0);
+
 #if UFODEBUG
         Debug.Log(transform.position.ToString() + " " + newLocation.ToString());
         Debug.Log(Vector3.Distance(newLocation, transform.position));
 #endif
+		// Arrived at position, fire the bomb!
         if (Vector3.Distance(newLocation, transform.position) <= 0.1)
 		{
             isMoving = false;

@@ -41,10 +41,10 @@ public class UFOProjectile : MonoBehaviour
 		movingDirection = direction;
 	}
 
-	// A collision event occurred so we need to check if 
-	// the flower was hit.
+	// A collision event occurred 
 	void OnCollisionEnter(Collision collision)
 	{
+		// We only care if the flower was hit.
 		if (collision.gameObject.name == "Flower") 
 		{
 			audioSource.PlayOneShot(explosionSnd);

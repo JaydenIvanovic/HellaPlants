@@ -8,8 +8,6 @@ using System.Runtime.InteropServices;
 
 /* 
  * Script which handles the user casting spells.
- * Key presses for now, gesture recognition will come after 
- * implementation of basic logic.
  */
 public class Spells : MonoBehaviour 
 {
@@ -95,7 +93,8 @@ public class Spells : MonoBehaviour
 	}
 
 
-    // Reset game state.
+    // Reset spell state, basically clean up
+	// any instantiated objects.
     private void Reset()
     {
         if (fertilizer_i)
@@ -132,7 +131,7 @@ public class Spells : MonoBehaviour
     }
 
 
-    // Check if wind or shield has been cast.
+    // Check if wind has been cast.
     private bool TimedSpellInProgress()
     {
         if (wind_i)

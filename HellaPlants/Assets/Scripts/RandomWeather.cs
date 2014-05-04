@@ -3,6 +3,9 @@
 using UnityEngine;
 using System.Collections;
 
+// This script should be attached to the Environment game object.
+// It handles the random selection of weather every MAX_SECONDS
+// and the setting of weather (visual/audial representation).
 public class RandomWeather : MonoBehaviour 
 {
     public float MAX_SECONDS;
@@ -73,6 +76,7 @@ public class RandomWeather : MonoBehaviour
 		}
     }
 
+	// Create sunny weather.
     private void Sunny()
     {
 #if WEATHERDEBUG
@@ -81,6 +85,7 @@ public class RandomWeather : MonoBehaviour
         weather = (GameObject) Instantiate(sunny);
     }
 
+	// Create rainy weather.
     private void Rainy()
     {
 #if WEATHERDEBUG
@@ -89,6 +94,7 @@ public class RandomWeather : MonoBehaviour
         weather = (GameObject) Instantiate(rainy);
     }
 
+	// Create cloudy weather.
     private void Cloudy()
     {
 #if WEATHERDEBUG
@@ -102,6 +108,7 @@ public class RandomWeather : MonoBehaviour
         cloudy = true;
     }
 
+	// Create snowy weather.
 	private void Snowy()
 	{
 		weather = (GameObject)Instantiate(snow);
@@ -110,6 +117,8 @@ public class RandomWeather : MonoBehaviour
 		snowy = true;
 	}
 
+	// Keeps track of how long the current weather condition has been in
+	// play and retrieves a new weather if the timer hits its max.
     private void UpdateWeatherTimer()
     {
         if (secondsPassed >= MAX_SECONDS)
@@ -126,12 +135,13 @@ public class RandomWeather : MonoBehaviour
             secondsPassed += Time.deltaTime;
         }
     }
-
+	
 	public Weather GetWeather()
 	{
 		return currentWeather;
 	}
 
+	// Set the current weather to a new weather.
 	public void SetWeather(Weather w)
 	{
 		currentWeather = w;
@@ -186,11 +196,11 @@ public class RandomWeather : MonoBehaviour
 			snd = snowSnd;
 		}
 
+		// Play the sound associated with the current weather.
 		if (snd) 
 		{
 			Destroy(GameObject.Find("One shot audio"));
 			AudioSource.PlayClipAtPoint(snd, transform.position,100F);
 		}
-		//Snd.SetScheduledEndTime (3);
 	}
 }

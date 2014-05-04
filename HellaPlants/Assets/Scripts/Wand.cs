@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-// Not used in the current game. Was way to messy...
+// Not used in the current game. Was way to messy gameplay wise.
 public class Wand : MonoBehaviour 
 {
     public GameObject fireball;

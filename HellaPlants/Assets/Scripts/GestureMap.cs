@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+// Stores the collection of gesture sequences and the mapping between them
+// and the spell which they represent.
 public class GestureMap 
 {
 	public enum Spell{Sun, Rain, Fert, Wind, Misc, None};
