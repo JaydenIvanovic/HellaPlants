@@ -23,6 +23,7 @@ public class GestureMap
 	// All the recognized sun gesture sequences.
 	void SetSunGestures()
 	{
+        /*
 		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.N, 
 		                                              Gestures.direction.E, 
 		                                              Gestures.direction.S, 
@@ -63,11 +64,46 @@ public class GestureMap
 		                                              Gestures.direction.E, 
 			                                          Gestures.direction.N}, 
 		               Spell.Sun);
+         */
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SE, 
+		                                              Gestures.direction.SW, 
+		                                              Gestures.direction.NW, 
+			                                          Gestures.direction.NE}, Spell.Sun);
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.NW, 
+		                                              Gestures.direction.NE, 
+			                                          Gestures.direction.SE}, Spell.Sun);
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NW, 
+		                                              Gestures.direction.NE, 
+		                                              Gestures.direction.SE, 
+			                                          Gestures.direction.SW}, Spell.Sun);
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE, 
+		                                              Gestures.direction.SE, 
+		                                              Gestures.direction.SW, 
+			                                          Gestures.direction.NW}, Spell.Sun);
+
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SE, 
+		                                              Gestures.direction.NE, 
+		                                              Gestures.direction.NW, 
+			                                          Gestures.direction.SW}, Spell.Sun);
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE, 
+		                                              Gestures.direction.NW, 
+		                                              Gestures.direction.SW, 
+			                                          Gestures.direction.SE}, Spell.Sun);
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NW, 
+		                                              Gestures.direction.SW, 
+		                                              Gestures.direction.SE, 
+			                                          Gestures.direction.NE}, Spell.Sun);
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.SE, 
+		                                              Gestures.direction.NE, 
+			                                          Gestures.direction.NW}, Spell.Sun);
 	}
 
 	// All the recognized rain gesture sequences.
 	void SetRainGestures()
 	{
+        /*
 		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
 		                                              Gestures.direction.E, 
 		                                              Gestures.direction.SW}, 
@@ -120,11 +156,19 @@ public class GestureMap
 		                                              Gestures.direction.W, 
 		                                              Gestures.direction.NE}, 
 		               Spell.Rain);
+         */
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.SE, 
+		                                              Gestures.direction.SW}, Spell.Rain);
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE, 
+		                                              Gestures.direction.NW, 
+		                                              Gestures.direction.NE}, Spell.Rain);
 	}
 
 	// All the recognized fertilizer gesture sequences.
 	void SetFertGestures()
 	{
+        /*
 		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
 		                                              Gestures.direction.SE}, 
 		               Spell.Fert);
@@ -180,11 +224,17 @@ public class GestureMap
 													  Gestures.direction.E,
 													  Gestures.direction.SE}, 
 		               Spell.Fert);
+         */
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SE, 
+		                                              Gestures.direction.NE}, Spell.Fert);
+        gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SW, 
+		                                              Gestures.direction.NW}, Spell.Fert);
 	}
 
 	// All the recognized wind gesture sequences.
 	void SetWindGestures()
 	{
+        /*
 		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.SE, 
 		                                              Gestures.direction.SW}, 
 		               Spell.Wind);
@@ -211,6 +261,7 @@ public class GestureMap
 		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE, 
 		                                              Gestures.direction.NW}, 
 		               Spell.Wind);
+         */
 	}
 
 	// All the recognized random event gesture sequences. Triangle shape.

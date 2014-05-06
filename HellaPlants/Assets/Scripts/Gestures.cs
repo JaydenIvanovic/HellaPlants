@@ -28,17 +28,17 @@ public class Gestures : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (recording == false && Input.GetMouseButtonDown (0)) { //TODO: Change this to check for touch, not mouse
+		if (recording == false && Input.GetMouseButtonDown (0)) {
 			recording = true;
 			rawData.Clear();
 		} 
-		else if (recording == true && Input.GetMouseButtonUp (0)) { //TODO: Change this to check for touch, not mouse
+		else if (recording == true && Input.GetMouseButtonUp (0)) {
 			recording = false;
 			decipherGesture ();
 		}
 
 		if (recording == true) {
-			Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y); //TODO: Change this to find touch position
+			Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 			rawData.Add(mousePosition);
 		}
 	}
@@ -135,6 +135,8 @@ public class Gestures : MonoBehaviour {
 		float xChange = end.x - start.x;
 		float yChange = end.y - start.y;
 
+        //Uncomment this code to make GR 8-directional instead of 4
+        /*
 		if (Math.Abs (xChange) > (Math.Abs (yChange) * 1.5)) {
 			if (xChange > 0)
 				return direction.E;
@@ -148,6 +150,7 @@ public class Gestures : MonoBehaviour {
 				return direction.S;
 		}
 		else{
+         * */
 			if (xChange > 0 && yChange > 0)
 				return direction.NE;
 			if (xChange > 0 && yChange < 0)
@@ -158,7 +161,9 @@ public class Gestures : MonoBehaviour {
 				return direction.SW;
 			else
 				return direction.NONE;
+        /*
 		}
+         */
 	}
 
 }
