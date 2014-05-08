@@ -16,6 +16,7 @@ public class Spells : MonoBehaviour
 	private GameObject environment, flower;
 	private RandomWeather rw;
 	private GestureMap gestureMap;
+	private WizardPowerups powerups;
 
     // Use this for initialization
 	void Start () 
@@ -23,6 +24,7 @@ public class Spells : MonoBehaviour
 		environment = GameObject.FindGameObjectWithTag ("Environment");
         flower = GameObject.Find("Flower");
 		rw = environment.GetComponent<RandomWeather> ();
+		powerups = environment.GetComponent<WizardPowerups> ();
         secondsPassed = 0f;
 		gestureMap = new GestureMap ();
         Reset();
@@ -80,6 +82,21 @@ public class Spells : MonoBehaviour
 				break;
 		}
 	
+		if (powerups.Exists()) {
+			if(powerups.Powerup() == WizardPowerups.Powerups.Regeneration)
+			// Regeneration.
+				;
+			if(powerups.Powerup() == WizardPowerups.Powerups.SlowTime)
+			// Slow time.
+				;
+			if(powerups.Powerup() == WizardPowerups.Powerups.KillBugs)
+			// Kill all bugs.
+				;
+			if(powerups.Powerup() == WizardPowerups.Powerups.Shield)
+			// Shield.
+				;
+		}
+
         /* //Cast fireball.
         if (dirList.Count == 1 && (dirList[0] == Gestures.direction.N))
         {
