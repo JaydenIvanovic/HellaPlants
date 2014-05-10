@@ -6,16 +6,25 @@ public class WizardPowerups : MonoBehaviour
 {
 	private bool wizardExists;
 	private float chance;
-	public enum Powerups {Regeneration, SlowTime, KillBugs, Shield, None};
-	private Powerups currentPowerup;
+	//public enum Powerups {Regeneration, SlowTime, KillBugs, Shield, None};
+	//private Powerups currentPowerup;
+    private GestureMap.Spell currentPowerup;
 	public GameObject wizardPrefab;
 	private GameObject wizard;
+    public GameObject player;
+    private Spells spells;
+    //private GestureMap gestureMap;
+    List<Gestures.direction> currentGesture;
 
 	// Use this for initialization
 	void Start () 
 	{
+        //player = GameObject.FindGameObjectWithTag("Player");
+        spells = player.GetComponent<Spells>();
+        currentGesture = null;
+        //gestureMap = spells.getGestureMap();
 		wizardExists = false;
-		currentPowerup = Powerups.None;
+		currentPowerup = GestureMap.Spell.None;
 		chance = 0.0f;
 		InvokeRepeating ("RandomPowerup", 0f, 5f);
 	}
@@ -23,31 +32,34 @@ public class WizardPowerups : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		GetRandGesture (5);
 	}
 
-	// The wizard exits.
+	// The wizard exists.
 	public bool Exists()
 	{
 		return wizardExists;
 	}
 
-	// The curret powerup available.
-	public Powerups Powerup()
-	{
-		return currentPowerup;
-	}
-
 	private void ShowWizard()
 	{
-		wizardExists = true;
-		wizard = Instantiate (wizardPrefab) as GameObject;
+        if (currentGesture != null)
+        {
+            Invoke("DestroyWizard", 15f);
+            spells.getGestureMap().SetPowerupGesture(currentPowerup,currentGesture);
+            wizardExists = true;
+            wizard = Instantiate(wizardPrefab) as GameObject;
+        }
 	}
 
-	private void DestroyWizard()
+	public void DestroyWizard()
 	{
-		wizardExists = false;
-		Destroy (wizard);
+        if (wizardExists == true)
+        {
+            spells.getGestureMap().UnsetPowerupGesture(currentGesture);
+            currentGesture = null;
+            wizardExists = false;
+            Destroy(wizard);
+        }
 	}
 
 	// Set current powerup to a random spell
@@ -57,16 +69,20 @@ public class WizardPowerups : MonoBehaviour
 		switch(r)
 		{
 			case 0:
-				currentPowerup = Powerups.Regeneration;
+                currentPowerup = GestureMap.Spell.Regeneration;
+                currentGesture = GetRandGesture(5);
 				break;
 			case 1:
-				currentPowerup = Powerups.SlowTime;
+                currentPowerup = GestureMap.Spell.SlowTime;
+                currentGesture = GetRandGesture(4);
 				break;
 			case 2:
-				currentPowerup = Powerups.KillBugs;
+                currentPowerup = GestureMap.Spell.KillBugs;
+                currentGesture = GetRandGesture(3);
 				break;
-			case 3: 
-				currentPowerup = Powerups.Shield;
+			case 3:
+                currentPowerup = GestureMap.Spell.Shield;
+                currentGesture = GetRandGesture(2);
 				break;
 		}
 	}
@@ -84,10 +100,9 @@ public class WizardPowerups : MonoBehaviour
 			SetRandomSpell();
 			ShowWizard();
 			chance = 0.0f;
-			Invoke("DestroyWizard", 6f);
 		}
+        //failure
 		else
-			//failure
 			chance += 0.05f;
 	}
 
@@ -156,29 +171,40 @@ public class WizardPowerups : MonoBehaviour
 		return Gestures.direction.NONE;
 	}
 
-	// CHECK THAT IT DOESNT GENERATE GESTURES ALREADY IN USE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public List<Gestures.direction> GetRandGesture (int length)
 	{
-		List<Gestures.direction> gesture = new List<Gestures.direction>();
+        List<Gestures.direction> gesture = new List<Gestures.direction>();
+        do{
+            gesture.Clear();
+            gesture.Add(RandomDirection(Gestures.direction.NONE));
 
-		gesture.Add (RandomDirection (Gestures.direction.NONE));
+            for (int i = 1; i < length; i++)
+                gesture.Add(RandomDirection(gesture[i - 1]));
 
-		for(int i = 1; i < length; i++)
-			gesture.Add(RandomDirection(gesture[i - 1]));
+            string directions = "";
+            if (currentPowerup == GestureMap.Spell.Regeneration)
+                directions += "Regeneration: ";
+            if (currentPowerup == GestureMap.Spell.KillBugs)
+                directions += "Kill Bugs: ";
+            if (currentPowerup == GestureMap.Spell.Shield)
+                directions += "Shield: ";
+            if (currentPowerup == GestureMap.Spell.SlowTime)
+                directions += "Slow Time: ";
+            
+            for (int i = 0; i < gesture.Count; i++)
+            {
+                if (gesture[i] == Gestures.direction.NE)
+                    directions += "NE ";
+                if (gesture[i] == Gestures.direction.NW)
+                    directions += "NW ";
+                if (gesture[i] == Gestures.direction.SE)
+                    directions += "SE ";
+                if (gesture[i] == Gestures.direction.SW)
+                    directions += "SW ";
+            }
+            Debug.Log(directions);
+        } while (spells.getGestureMap().CheckGestureExists(gesture) == true); //Check the gesture isn't already in use
 
-		string directions = "";
-		for(int i = 0; i < gesture.Count; i++)
-		{
-			if(gesture[i] == Gestures.direction.NE)
-				directions += "NE ";
-			if(gesture[i] == Gestures.direction.NW)
-				directions += "NW ";
-			if(gesture[i] == Gestures.direction.SE)
-				directions += "SE ";
-			if(gesture[i] == Gestures.direction.SW)
-				directions += "SW ";
-		}
-		Debug.Log (directions);
 		return gesture;
 	}
 }

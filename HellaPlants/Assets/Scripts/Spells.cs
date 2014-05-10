@@ -40,6 +40,10 @@ public class Spells : MonoBehaviour
             CheckWeatherTimer();
     }
 
+    public GestureMap getGestureMap()
+    {
+        return gestureMap;
+    }
 
 	//This method is called from Gestures.cs
 	public void setGesture(List<Gestures.direction> dirList)
@@ -78,10 +82,26 @@ public class Spells : MonoBehaviour
 					flower.GetComponent<PlantState>().IncreaseSoil();
 				}
 				break;
+            case GestureMap.Spell.Regeneration:
+                Debug.Log("Regeneration cast!");
+                powerups.DestroyWizard();
+                break;
+            case GestureMap.Spell.SlowTime:
+                Debug.Log("SlowTime cast!");
+                powerups.DestroyWizard();
+                break;
+            case GestureMap.Spell.KillBugs:
+                Debug.Log("KillBugs cast!");
+                powerups.DestroyWizard();
+                break;
+            case GestureMap.Spell.Shield:
+                Debug.Log("Shield cast!");
+                powerups.DestroyWizard();
+                break;
 			default:
 				break;
 		}
-	
+	/*
 		if (powerups.Exists()) {
 			if(powerups.Powerup() == WizardPowerups.Powerups.Regeneration)
 			// Regeneration.
@@ -96,6 +116,7 @@ public class Spells : MonoBehaviour
 			// Shield.
 				;
 		}
+        */
 
         /* //Cast fireball.
         if (dirList.Count == 1 && (dirList[0] == Gestures.direction.N))

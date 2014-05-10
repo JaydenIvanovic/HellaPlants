@@ -6,7 +6,7 @@ using System.Collections.Generic;
 // and the spell which they represent.
 public class GestureMap 
 {
-	public enum Spell{Sun, Rain, Fert, Wind, Misc, None};
+	public enum Spell{Sun, Rain, Fert, Wind, Misc, Regeneration, SlowTime, KillBugs, Shield, None};
 	private Dictionary<List<Gestures.direction>, Spell> gestureMap;
 
 	// Use this for initialization
@@ -19,6 +19,23 @@ public class GestureMap
 		SetWindGestures();
 		SetMiscGestures();
 	}
+
+    public void SetPowerupGesture(Spell spell, List<Gestures.direction> gesture)
+    {
+        gestureMap.Add(gesture,spell);
+    }
+
+    public void UnsetPowerupGesture(List<Gestures.direction> gesture)
+    {
+        gestureMap.Remove(gesture);
+    }
+
+    public bool CheckGestureExists(List<Gestures.direction> gesture)
+    {
+        if (gestureMap.ContainsKey(gesture))
+            return true;
+        return false;
+    }
 
 	// All the recognized sun gesture sequences.
 	void SetSunGestures()
@@ -267,6 +284,7 @@ public class GestureMap
 	// All the recognized random event gesture sequences. Triangle shape.
 	void SetMiscGestures()
 	{
+        /*
 		gestureMap.Add(new List<Gestures.direction>(){Gestures.direction.NE,
 													  Gestures.direction.SE,
 		                                              Gestures.direction.W}, 
@@ -420,6 +438,7 @@ public class GestureMap
 		                                              Gestures.direction.SE,
 		                                              Gestures.direction.S}, 
 		               Spell.Misc);
+         * */
 	}
 
 	// Get the spell corresponding to this sequence. Returns a none spell

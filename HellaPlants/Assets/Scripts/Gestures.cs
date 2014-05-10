@@ -1,4 +1,4 @@
-﻿#define GESTURESDEBUG
+﻿//#define GESTURESDEBUG
 
 using UnityEngine;
 using System;
