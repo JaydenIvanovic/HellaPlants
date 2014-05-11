@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\DestoryParticleSystem.cs" />
      <Compile Include="Assets\Scripts\DifficultyController.cs" />
      <Compile Include="Assets\Scripts\DisplayScore.cs" />
+     <Compile Include="Assets\Scripts\DrawLine.cs" />
      <Compile Include="Assets\Scripts\GameOver.cs" />
      <Compile Include="Assets\Scripts\GestureMap.cs" />
      <Compile Include="Assets\Scripts\Gestures.cs" />
