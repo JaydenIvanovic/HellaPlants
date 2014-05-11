@@ -131,4 +131,14 @@ public class BugAI : MonoBehaviour
         Destroy(bug);
 		(diff.scr) += 10;
     }
+
+	// Destroys all bugs in the scene.
+	public void RemoveAllBugs()
+	{
+		for(int i = 0; i < bugs.Count;)
+		{
+			Destroy(bugs[i]);
+			bugs.Remove(bugs[i]);
+		}
+	}
 }

@@ -11,12 +11,14 @@ public class Spells : MonoBehaviour
 {
     public GameObject fertilizer, wind, shield;
     public float MAX_SECONDS;
-    private GameObject fertilizer_i, wind_i;
+    private GameObject fertilizer_i, wind_i, shield_i;
     private float secondsPassed;
 	private GameObject environment, flower;
 	private RandomWeather rw;
 	private GestureMap gestureMap;
 	private WizardPowerups powerups;
+	private PlantState plantState;
+	private BugAI bugs;
 
     // Use this for initialization
 	void Start () 
@@ -25,6 +27,8 @@ public class Spells : MonoBehaviour
         flower = GameObject.Find("Flower");
 		rw = environment.GetComponent<RandomWeather> ();
 		powerups = environment.GetComponent<WizardPowerups> ();
+		bugs = environment.GetComponent<BugAI>();
+		plantState = flower.GetComponent<PlantState>();
         secondsPassed = 0f;
 		gestureMap = new GestureMap ();
         Reset();
@@ -64,7 +68,7 @@ public class Spells : MonoBehaviour
 				if (!fertilizer_i)
 				{
 					fertilizer_i = (GameObject)Instantiate(fertilizer);
-					flower.GetComponent<PlantState>().IncreaseSoil();
+					plantState.IncreaseSoil();
 				}
 				break;
 			case GestureMap.Spell.Wind:
@@ -75,49 +79,28 @@ public class Spells : MonoBehaviour
 					wind_i = (GameObject)Instantiate(wind);
 				}
 				break;
-			case GestureMap.Spell.Misc:
-				if (!fertilizer_i)
-				{
-					fertilizer_i = (GameObject)Instantiate(fertilizer);
-					flower.GetComponent<PlantState>().IncreaseSoil();
-				}
-				break;
             case GestureMap.Spell.Regeneration:
                 Debug.Log("Regeneration cast!");
                 powerups.DestroyWizard();
                 break;
             case GestureMap.Spell.SlowTime:
                 Debug.Log("SlowTime cast!");
+				SlowTime();
                 powerups.DestroyWizard();
                 break;
             case GestureMap.Spell.KillBugs:
                 Debug.Log("KillBugs cast!");
+				bugs.RemoveAllBugs();
                 powerups.DestroyWizard();
                 break;
             case GestureMap.Spell.Shield:
-                Debug.Log("Shield cast!");
+				CastShield();
+				Invoke("DestroyShield", 5);
                 powerups.DestroyWizard();
                 break;
 			default:
 				break;
 		}
-	/*
-		if (powerups.Exists()) {
-			if(powerups.Powerup() == WizardPowerups.Powerups.Regeneration)
-			// Regeneration.
-				;
-			if(powerups.Powerup() == WizardPowerups.Powerups.SlowTime)
-			// Slow time.
-				;
-			if(powerups.Powerup() == WizardPowerups.Powerups.KillBugs)
-			// Kill all bugs.
-				;
-			if(powerups.Powerup() == WizardPowerups.Powerups.Shield)
-			// Shield.
-				;
-		}
-        */
-
         /* //Cast fireball.
         if (dirList.Count == 1 && (dirList[0] == Gestures.direction.N))
         {
@@ -174,4 +157,28 @@ public class Spells : MonoBehaviour
             return true;
         return false;
     }	
+
+
+	private void SlowTime()
+	{
+		Time.timeScale = 0.5f;
+		Invoke("RestoreTime", 5f);
+	}
+
+	private void RestoreTime()
+	{
+		Time.timeScale = 1f;
+	}
+
+	private void CastShield()
+	{
+		shield_i = Instantiate(shield) as GameObject;
+		plantState.Vulnerable(false);
+	}
+
+	private void DestroyShield()
+	{
+		plantState.Vulnerable(true);
+		Destroy(shield_i);
+	}
 }

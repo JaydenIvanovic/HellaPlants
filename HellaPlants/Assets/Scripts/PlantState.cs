@@ -10,6 +10,7 @@ public class PlantState : MonoBehaviour
     private float soil {get;set;}
     private float water {get;set;}
     private float sun {get;set;}
+	private bool vulnerable;
     public int growthSecs;
     private RandomWeather rw;
 	private DifficultyController diffContr;
@@ -34,6 +35,7 @@ public class PlantState : MonoBehaviour
 		diffContr = environ.GetComponent<DifficultyController> ();
         spriteR = GetComponent<SpriteRenderer>();
         growthLevel = 0;
+		vulnerable = true;
     }
 
 	// Update is called once per frame
@@ -60,7 +62,7 @@ public class PlantState : MonoBehaviour
         }
 		else if (rw.GetWeather() == RandomWeather.Weather.Snowy)
 		{
-			health = ValueFilter(health, Time.deltaTime * -8f);
+			TakeDamage(8f);
 		}
 
         // Soil always gradually depletes.
@@ -133,13 +135,15 @@ public class PlantState : MonoBehaviour
 	// Called by the BugAI script when the bug is attacking the plant.
 	public void TakeDamage(float damage)
 	{
-		health = ValueFilter (health, Time.deltaTime * -damage);
+		if(vulnerable)
+			health = ValueFilter (health, Time.deltaTime * -damage);
 	}
 
 	// aka, not damage over time so deltaTime isn't taken into consideration.
 	public void TakePureDamage(float damage)
 	{
-		health = ValueFilter (health, -damage);
+		if(vulnerable)
+			health = ValueFilter (health, -damage);
 	}
 
     // Change the plant to its next 'growth form'.
@@ -161,5 +165,9 @@ public class PlantState : MonoBehaviour
         growthLevel++;
     }
 
+	public void Vulnerable(bool vulnerable)
+	{
+		this.vulnerable = vulnerable;
+	}
 
 }
