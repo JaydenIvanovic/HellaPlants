@@ -9,9 +9,10 @@ using System.Runtime.InteropServices;
 // Script which handles the user casting spells.
 public class Spells : MonoBehaviour 
 {
-    public GameObject fertilizer, wind, shield;
+	public GameObject fertilizer, wind, shield, regen;
+	public AudioClip successSnd;
     public float MAX_SECONDS;
-    private GameObject fertilizer_i, wind_i, shield_i;
+    private GameObject fertilizer_i, wind_i, shield_i, regen_i;
     private float secondsPassed;
 	private GameObject environment, flower;
 	private RandomWeather rw;
@@ -81,6 +82,8 @@ public class Spells : MonoBehaviour
 				break;
             case GestureMap.Spell.Regeneration:
                 Debug.Log("Regeneration cast!");
+				CastRegen();
+				Invoke("DestroyRegen", 5);
                 powerups.DestroyWizard();
                 break;
             case GestureMap.Spell.SlowTime:
@@ -180,5 +183,17 @@ public class Spells : MonoBehaviour
 	{
 		plantState.Vulnerable(true);
 		Destroy(shield_i);
+	}
+
+	private void CastRegen()
+	{
+		regen_i = Instantiate(regen) as GameObject;
+		plantState.Regenerate(true);
+	}
+	
+	private void DestroyRegen()
+	{
+		plantState.Regenerate(false);
+		Destroy(regen_i);
 	}
 }

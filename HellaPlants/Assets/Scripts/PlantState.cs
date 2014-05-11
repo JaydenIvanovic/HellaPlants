@@ -10,7 +10,7 @@ public class PlantState : MonoBehaviour
     private float soil {get;set;}
     private float water {get;set;}
     private float sun {get;set;}
-	private bool vulnerable;
+	private bool vulnerable, regenerate;
     public int growthSecs;
     private RandomWeather rw;
 	private DifficultyController diffContr;
@@ -84,6 +84,17 @@ public class PlantState : MonoBehaviour
 			health = ValueFilter (health, Time.deltaTime * 1f);
 		else
 			Application.LoadLevel ("GameOver");
+
+		// The plant is regenerating, be generous and regenerate
+		// sun, water and soil(effectively reducing the rate it decreases
+		// due to weather) in addition to health.
+		if(regenerate)
+		{
+			health = ValueFilter (health, Time.deltaTime * 8f);
+			sun = ValueFilter(sun, Time.deltaTime * 8f);
+			water = ValueFilter(water, Time.deltaTime * 8f);
+			soil = ValueFilter(soil, Time.deltaTime * 8f);
+		}
 
         // Show visual update.
         Update3DText();
@@ -165,9 +176,15 @@ public class PlantState : MonoBehaviour
         growthLevel++;
     }
 
+	// Set the plant to be vulnerable or invulnerable.
 	public void Vulnerable(bool vulnerable)
 	{
 		this.vulnerable = vulnerable;
 	}
 
+	// Tell the plant that it can regenerate at a rapid rate.
+	public void Regenerate(bool regen)
+	{
+		this.regenerate = regen;
+	}
 }
