@@ -11,11 +11,19 @@ public class WizardPowerups : MonoBehaviour
     private GameObject wizard;
     public GameObject player;
     private Spells spells;
+    List<Gestures.direction> currentGesture;
+
+    //Needing a different texture for each direction fills me with sadness, but I couldn't find an easy way to rotate them.
     public Texture NEarrowTexture;
     public Texture NWarrowTexture;
     public Texture SEarrowTexture;
     public Texture SWarrowTexture;
-    List<Gestures.direction> currentGesture;
+    public int gestureStartX; //X and Y co-ordinates where the gesture is shown
+    public int gestureStartY;
+    public int gestureArrowDimensions; //height and width of first arrow
+    public float gestureGrowthFactor; //How much longer each arrow is than the one preceeding it
+
+    
 
     // Use this for initialization
     void Start()
@@ -68,21 +76,50 @@ public class WizardPowerups : MonoBehaviour
 
     private void drawGesture()
     {
+        int xPos = gestureStartX;
+        int yPos = gestureStartY;
+
         for (int i = 0; i < currentGesture.Count; i++)
         {
+            int dimension = (int)(gestureArrowDimensions * Mathf.Pow(gestureGrowthFactor, i));
+            int endX;
+            int endY;
+
             Texture tex;
             if (currentGesture[i] == Gestures.direction.NE)
+            {
                 tex = NEarrowTexture;
+                yPos -= dimension;
+                endX = xPos + dimension;
+				endY = yPos;
+            }
             else if (currentGesture[i] == Gestures.direction.NW)
+            {
                 tex = NWarrowTexture;
+                yPos -= dimension;
+                xPos -= dimension;
+				endX = xPos;
+				endY = yPos;
+            }
             else if (currentGesture[i] == Gestures.direction.SE)
+            {
                 tex = SEarrowTexture;
+                endX = xPos + dimension;
+                endY = yPos + dimension;
+            }
             else if (currentGesture[i] == Gestures.direction.SW)
+            {
                 tex = SWarrowTexture;
+                xPos -= dimension;
+				endX = xPos;
+                endY = yPos + dimension;
+            }
             else
                 return;
 
-            GUI.DrawTexture(new Rect(200 + (i*80), 200, 40, 40), tex, ScaleMode.ScaleAndCrop, true, 0);
+            GUI.DrawTexture(new Rect(xPos,yPos, dimension,dimension), tex, ScaleMode.ScaleAndCrop, true, 0);
+            xPos = endX;
+            yPos = endY;
         }
     }
 
