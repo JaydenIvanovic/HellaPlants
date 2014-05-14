@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 // Script which handles the user casting spells.
 public class Spells : MonoBehaviour 
 {
-	public GameObject fertilizer, wind, shield, regen;
+	public GameObject fertilizer, wind, shield, regen, meteor;
 	public AudioClip successSnd;
     public float MAX_SECONDS;
     private GameObject fertilizer_i, wind_i, shield_i, regen_i;
@@ -93,7 +93,7 @@ public class Spells : MonoBehaviour
                 break;
             case GestureMap.Spell.KillBugs:
                 Debug.Log("KillBugs cast!");
-				bugs.RemoveAllBugs();
+				Instantiate(meteor);
                 powerups.DestroyWizard();
                 break;
             case GestureMap.Spell.Shield:

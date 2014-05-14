@@ -8,8 +8,6 @@ using System.Collections;
 public class BugKiller : MonoBehaviour
 {
     private BugAI bugAI;
-	public GameObject blood;
-	public GameObject points;
 
     void Start()
     {
@@ -36,8 +34,6 @@ public class BugKiller : MonoBehaviour
             if( Vector2.Distance(mouse, gameObject.transform.position) < 0.6) 
 			{
 				bugAI.RemoveBug (gameObject);
-				Instantiate(blood, gameObject.transform.position, gameObject.transform.rotation);
-				Instantiate(points, gameObject.transform.position, gameObject.transform.rotation);
 			}
 		}
 	}

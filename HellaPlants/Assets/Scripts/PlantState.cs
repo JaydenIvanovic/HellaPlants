@@ -18,6 +18,7 @@ public class PlantState : MonoBehaviour
 	private GameObject environ;
     private uint growthLevel;
     public Sprite f1, f2, f3, f4, f5;
+	public GameObject growthParticles;
 
 	// Use this for initialization
 	void Awake () 

@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\ListComparer.cs" />
      <Compile Include="Assets\Scripts\LoadLevelonClick.cs" />
+     <Compile Include="Assets\Scripts\Meteor.cs" />
      <Compile Include="Assets\Scripts\PauseGamePrefab.cs" />
      <Compile Include="Assets\Scripts\PlantState.cs" />
      <Compile Include="Assets\Scripts\RandomWeather.cs" />

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 // to split the two into seperate classes in the future assignment.
 public class BugAI : MonoBehaviour 
 {
-	public GameObject redbug, bluebug, plant;
+	public GameObject redbug, bluebug, plant, blood, points;
 	private List<GameObject> bugs;
 	public float speed;
 	private int numBugsAtt;
@@ -131,6 +131,8 @@ public class BugAI : MonoBehaviour
 		audio.PlayOneShot (squash);
         bugs.Remove(bug);
         Destroy(bug);
+		Instantiate(blood, bug.transform.position, bug.transform.rotation);
+		Instantiate(points, bug.transform.position, bug.transform.rotation);
 		(diff.scr) += 10;
     }
 
@@ -138,9 +140,6 @@ public class BugAI : MonoBehaviour
 	public void RemoveAllBugs()
 	{
 		for(int i = 0; i < bugs.Count;)
-		{
-			Destroy(bugs[i]);
-			bugs.Remove(bugs[i]);
-		}
+			RemoveBug(bugs[i]);
 	}
 }
