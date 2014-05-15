@@ -22,7 +22,6 @@ public class HealthBar : MonoBehaviour
 		Vector2 newSize;
 		newSize.x = size.x * Screen.width;
 		newSize.y = size.y * Screen.height;
-		//Debug.Log (newSize.x + " " + newSize.y);
 
         //draw the background:
         GUI.BeginGroup(new Rect(Screen.width * pos.x, Screen.height * pos.y, newSize.x, newSize.y));
@@ -39,6 +38,5 @@ public class HealthBar : MonoBehaviour
     public void updateDisplay(float percent)
     {
         barDisplay = percent;
-		//Debug.Log (barDisplay);
     }
 }

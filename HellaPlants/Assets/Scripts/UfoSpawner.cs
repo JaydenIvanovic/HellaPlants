@@ -9,25 +9,51 @@ public class UfoSpawner : MonoBehaviour
 	public GameObject ufo;
 	private Timer t;
 	private bool canUpdate;
+	private int requiredDifficulty;
+	private DifficultyController diff;
+	private GameObject environment;
 
 	void Start ()
 	{
-		t = new Timer(Random.Range(10,30));
+		environment = GameObject.FindGameObjectWithTag ("Environment");
+		diff = environment.GetComponent<DifficultyController> ();
+
+		t = new Timer(0);
+		randomizeTimerMax ();
 		canUpdate = true;
+		requiredDifficulty = 1;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-		if(canUpdate)
-			t.updateTimer(Time.deltaTime);
+		if (diff.GetDifficulty() >= requiredDifficulty){
+			if(canUpdate)
+				t.updateTimer(Time.deltaTime);
 
-		if(t.hitMaxTime())
-		{
-			canUpdate = false;
-			Instantiate(ufo, getRandomSpawnPoint(), Quaternion.identity);
-			t.resetTimer();
+			if(t.hitMaxTime())
+			{
+				canUpdate = false;
+				Instantiate(ufo, getRandomSpawnPoint(), Quaternion.identity);
+				randomizeTimerMax();
+				t.resetTimer();
+			}
 		}
+	}
+
+	//Chooses the time before the next UFO based on difficulty
+	private void randomizeTimerMax()
+	{
+		if (diff.GetDifficulty () == 0)
+			t.setMaxSeconds (Random.Range (20, 30));
+		if (diff.GetDifficulty () == 1)
+			t.setMaxSeconds (Random.Range (15, 25));
+		if (diff.GetDifficulty () == 2)
+			t.setMaxSeconds (Random.Range (12, 20));
+		if (diff.GetDifficulty () == 3)
+			t.setMaxSeconds (Random.Range (9, 15));
+		if (diff.GetDifficulty () > 3)
+			t.setMaxSeconds (Random.Range (7, 12));
 	}
 
 	// Randomly select the left or right spawn point.

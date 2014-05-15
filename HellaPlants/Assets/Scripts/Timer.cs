@@ -44,5 +44,7 @@ public class Timer
     public void setMaxSeconds(float max)
     {
         maxSeconds = max;
+		hitMax = false;
+		updateTimer (0);
     }
 }
