@@ -45,15 +45,15 @@ public class UfoSpawner : MonoBehaviour
 	private void randomizeTimerMax()
 	{
 		if (diff.GetDifficulty () == 0)
-			t.setMaxSeconds (Random.Range (20, 30));
+			t.setMaxSeconds (Random.Range (20f, 30f));
 		if (diff.GetDifficulty () == 1)
-			t.setMaxSeconds (Random.Range (15, 25));
+			t.setMaxSeconds (Random.Range (15f, 25f));
 		if (diff.GetDifficulty () == 2)
-			t.setMaxSeconds (Random.Range (12, 20));
+			t.setMaxSeconds (Random.Range (12f, 20f));
 		if (diff.GetDifficulty () == 3)
-			t.setMaxSeconds (Random.Range (9, 15));
+			t.setMaxSeconds (Random.Range (9f, 15f));
 		if (diff.GetDifficulty () > 3)
-			t.setMaxSeconds (Random.Range (7, 12));
+			t.setMaxSeconds (Random.Range (7f, 12f));
 	}
 
 	// Randomly select the left or right spawn point.

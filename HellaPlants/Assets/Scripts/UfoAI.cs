@@ -16,6 +16,7 @@ public class UfoAI : MonoBehaviour
 	public GameObject thunder;
 	private float speed;
 	private Vector3 offscreen;
+	private int numBullets;
 
 	// Use this for initialization
 	void Start () 
@@ -27,12 +28,24 @@ public class UfoAI : MonoBehaviour
 		plant = GameObject.Find("Flower");
 		ufoSpawner = environment.GetComponent<UfoSpawner>();
 		diffContr = environment.GetComponent<DifficultyController> ();
+
+		numBullets = 1;
+		if (diffContr.GetDifficulty () == 0)
+			numBullets = 1;
+		else if (diffContr.GetDifficulty () == 1)
+			numBullets = 1;
+		else if (diffContr.GetDifficulty () == 2)
+			numBullets = Random.Range (1,3);
+		else if (diffContr.GetDifficulty () == 3)
+			numBullets = Random.Range (1,4);
+		else if (diffContr.GetDifficulty () > 3)
+			numBullets = Random.Range (2,diffContr.GetDifficulty()+1);
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (isMoving)
+        if (numBullets > 0)
             moveToRandomLocation();
         else
 			moveOffScreen();
@@ -63,7 +76,8 @@ public class UfoAI : MonoBehaviour
 		// Arrived at position, fire the bomb!
         if (Vector3.Distance(newLocation, transform.position) <= 0.1)
 		{
-            isMoving = false;
+			xLoc = Random.Range(-9, 9);
+			numBullets --;
 			shootBolt();
 			offscreen = ufoSpawner.getRandomSpawnPoint();
 		}
