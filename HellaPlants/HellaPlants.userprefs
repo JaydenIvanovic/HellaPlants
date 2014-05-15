@@ -1,5 +1,5 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UfoAI.cs">
     <Files>
       <File FileName="Assets\Scripts\HealthBar.cs" Line="1" Column="1" />
@@ -10,7 +10,7 @@
       <File FileName="Assets\Scripts\WizardPowerups.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlantState.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BugAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UfoAI.cs" Line="58" Column="17" />
+      <File FileName="Assets\Scripts\UfoAI.cs" Line="86" Column="47" />
       <File FileName="Assets\Scripts\UfoSpawner.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Timer.cs" Line="1" Column="1" />
     </Files>
