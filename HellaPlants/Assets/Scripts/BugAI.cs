@@ -54,8 +54,8 @@ public class BugAI : MonoBehaviour
 	{
 		// Randomize the bug prefab to be selected.
 		int rNum = Random.Range(1,3);
-		float xpos;
-		float ypos;
+		float xpos = 0;
+		float ypos = 0;
 
 		// If we don't want the sneaky bug we should uncomment this as 
 		// it prevents the bug from appearing directly on the flower.
@@ -67,8 +67,29 @@ public class BugAI : MonoBehaviour
 		*/
 
 		// Random position the bug should appear at.
-		xpos = Random.Range (-14F, 14F); 
-		ypos = Random.Range (-6F, 4F); 
+		//xpos = Random.Range (-14F, 14F); 
+		//ypos = Random.Range (-6F, 4F); 
+
+		//Give the bug an equal chance of spawning on each of the four sides
+		switch(Random.Range (1,5))
+		{
+		case 1:
+			xpos = 11.5f;
+			ypos = Random.Range (-6.5f,6.5f);
+			break;
+		case 2:
+			xpos = -11.5f;
+			ypos = Random.Range (-6.5f,6.5f);
+			break;
+		case 3:
+			ypos = 6.5f;
+			xpos = Random.Range (-11.5f,11.5f);
+			break;
+		case 4:
+			ypos = -6.5f;
+			xpos = Random.Range (-11.5f,11.5f);
+			break;
+		}
 		
 		if (rNum == 1)
 			bugs.Add((GameObject)Instantiate (redbug, new Vector3(xpos, ypos, redbug.transform.position.z), Quaternion.identity));

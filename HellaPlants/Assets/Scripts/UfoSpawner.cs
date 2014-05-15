@@ -8,10 +8,10 @@ public class UfoSpawner : MonoBehaviour
 	public GameObject leftSpawnPoint, rightSpawnPoint;
 	public GameObject ufo;
 	private Timer t;
-	private bool canUpdate;
-	private int requiredDifficulty;
 	private DifficultyController diff;
 	private GameObject environment;
+	private int UFOCount;
+	private int allowedCount;
 
 	void Start ()
 	{
@@ -20,23 +20,32 @@ public class UfoSpawner : MonoBehaviour
 
 		t = new Timer(0);
 		randomizeTimerMax ();
-		canUpdate = true;
-		requiredDifficulty = 1;
+		UFOCount = 0;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-		if (diff.GetDifficulty() >= requiredDifficulty){
-			if(canUpdate)
+		if (diff.GetDifficulty() == 0)
+			allowedCount = 0;
+		else if (diff.GetDifficulty() < 5)
+			allowedCount = 1;
+		else if (diff.GetDifficulty () >= 5 && diff.GetDifficulty() < 10)
+			allowedCount = 2;
+		else
+			allowedCount = 3;
+
+		if (allowedCount != 0){
+
+			if(UFOCount < allowedCount)
 				t.updateTimer(Time.deltaTime);
 
 			if(t.hitMaxTime())
 			{
-				canUpdate = false;
 				Instantiate(ufo, getRandomSpawnPoint(), Quaternion.identity);
 				randomizeTimerMax();
 				t.resetTimer();
+				UFOCount++;
 			}
 		}
 	}
@@ -51,9 +60,11 @@ public class UfoSpawner : MonoBehaviour
 		if (diff.GetDifficulty () == 2)
 			t.setMaxSeconds (Random.Range (12f, 20f));
 		if (diff.GetDifficulty () == 3)
-			t.setMaxSeconds (Random.Range (9f, 15f));
-		if (diff.GetDifficulty () > 3)
-			t.setMaxSeconds (Random.Range (7f, 12f));
+			t.setMaxSeconds (Random.Range (11f, 18f));
+		if (diff.GetDifficulty () > 3 && diff.GetDifficulty() < 7)
+			t.setMaxSeconds (Random.Range (9f, 16f));
+		if (diff.GetDifficulty () >= 7)
+			t.setMaxSeconds (Random.Range (7f, 13f));
 	}
 
 	// Randomly select the left or right spawn point.
@@ -71,6 +82,6 @@ public class UfoSpawner : MonoBehaviour
 	// Will be called by the UfoAI script.
 	public void continueTimer()
 	{
-		canUpdate = true;
+		UFOCount--;
 	}
 }

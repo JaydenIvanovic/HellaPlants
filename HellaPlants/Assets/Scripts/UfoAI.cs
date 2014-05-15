@@ -27,16 +27,10 @@ public class UfoAI : MonoBehaviour
 		diffContr = environment.GetComponent<DifficultyController> ();
 
 		numBullets = 1;
-		if (diffContr.GetDifficulty () == 0)
+		if (diffContr.GetDifficulty () < 3)
 			numBullets = 1;
-		else if (diffContr.GetDifficulty () == 1)
-			numBullets = 1;
-		else if (diffContr.GetDifficulty () == 2)
-			numBullets = Random.Range (1,3);
-		else if (diffContr.GetDifficulty () == 3)
-			numBullets = Random.Range (1,4);
-		else if (diffContr.GetDifficulty () > 3)
-			numBullets = Random.Range (2,diffContr.GetDifficulty()+1);
+		else if (diffContr.GetDifficulty () > 2)
+			numBullets = Random.Range (1,diffContr.GetDifficulty()+1);
 	}
 	
 	// Update is called once per frame

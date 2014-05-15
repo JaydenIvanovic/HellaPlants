@@ -48,7 +48,7 @@ public class UFOProjectile : MonoBehaviour
 		if (collision.gameObject.name == "Flower") 
 		{
 			audioSource.PlayOneShot(explosionSnd);
-			plantState.TakePureDamage(100f);
+			plantState.TakePureDamage(50f);
 			Destroy (gameObject);
 		}
 	}
