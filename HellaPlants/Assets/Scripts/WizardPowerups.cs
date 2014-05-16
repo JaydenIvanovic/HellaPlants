@@ -23,12 +23,18 @@ public class WizardPowerups : MonoBehaviour
     public float gestureArrowDimensions; //height and width of first arrow
     public float gestureGrowthFactor; //How much longer each arrow is than the one preceeding it
 
+	private DifficultyController diff;
+	public int requiredDifficulty;
+	private GameObject environment;
+
     
 
     // Use this for initialization
     void Start()
     {
         spells = player.GetComponent<Spells>();
+		environment = GameObject.FindGameObjectWithTag ("Environment");
+		diff = environment.GetComponent<DifficultyController> ();
         currentGesture = null;
         wizardExists = false;
         currentPowerup = GestureMap.Spell.None;
@@ -56,7 +62,7 @@ public class WizardPowerups : MonoBehaviour
     {
         if (currentGesture != null)
         {
-            Invoke("DestroyWizard", 15f);
+            Invoke("DestroyWizard", 8f);
             spells.getGestureMap().SetPowerupGesture(currentPowerup, currentGesture);
             wizardExists = true;
             wizard = Instantiate(wizardPrefab) as GameObject;
@@ -162,6 +168,8 @@ public class WizardPowerups : MonoBehaviour
     {
         if (wizardExists)
             return;
+		if (requiredDifficulty > diff.GetDifficulty ())
+			return;
 
         // success
         if (chance > Random.Range(0, 1))
@@ -173,7 +181,7 @@ public class WizardPowerups : MonoBehaviour
         }
         //failure
         else
-            chance += 0.05f;
+            chance += 0.03f;
     }
 
     public Gestures.direction RandomDirection(Gestures.direction dir)

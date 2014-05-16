@@ -12,6 +12,7 @@ public class UfoSpawner : MonoBehaviour
 	private GameObject environment;
 	private int UFOCount;
 	private int allowedCount;
+	public int requiredDifficulty;
 
 	void Start ()
 	{
@@ -26,11 +27,11 @@ public class UfoSpawner : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (diff.GetDifficulty() == 0)
+		if (diff.GetDifficulty() < requiredDifficulty)
 			allowedCount = 0;
 		else if (diff.GetDifficulty() < 5)
 			allowedCount = 1;
-		else if (diff.GetDifficulty () >= 5 && diff.GetDifficulty() < 10)
+		else if (diff.GetDifficulty() < 10)
 			allowedCount = 2;
 		else
 			allowedCount = 3;

@@ -1,34 +1,59 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Tutorial : MonoBehaviour 
-{
-	private bool activated = false;
-	private const int COMPLETED = 1;
-	public string key{get;set;}
+public class Tutorial : MonoBehaviour {
+
+	private DifficultyController diff;
+	private GameObject environment;
+
+	public GameObject tutorialPrefab1;
+	public GameObject tutorialPrefab2;
+	public GameObject tutorialPrefab3;
+	public GameObject tutorialPrefab4;
+	private GameObject wizard;
+
+	int currentDif;
+	bool wizardExists;
 
 	// Use this for initialization
-	void Start () 
-	{
-		if(PlayerPrefs.GetInt(key) == COMPLETED)
-			activated  = false;
-		else
-			activated  = true;
+	void Start () {
+		environment = GameObject.FindGameObjectWithTag ("Environment");
+		diff = environment.GetComponent<DifficultyController> ();
+
+		currentDif = -1;
 	}
 	
 	// Update is called once per frame
-	void Update () 
-	{
-		if (activated)
-		{
-			// Check for the first occurence of different
-			// game scenarios and help the player!
+	void Update () {
+
+		//Check if difficulty has changed
+		if (currentDif != diff.GetDifficulty ()){
+			currentDif ++;
+
+			wizardExists = true;
+			Invoke("DestroyWizard", 4f);
+
+			if (currentDif == 0){
+				wizard = Instantiate(tutorialPrefab1) as GameObject;
+			}
+			else if (currentDif == 1){
+				wizard = Instantiate(tutorialPrefab2) as GameObject;
+			}
+			else if (currentDif == 2){
+				wizard = Instantiate(tutorialPrefab3) as GameObject;
+			}
+			else if (currentDif == 3){
+				wizard = Instantiate(tutorialPrefab4) as GameObject;
+			}
+			else
+				wizardExists = false;
 		}
 	}
 
-	// Record that the user has completed the tutorial.
-	public void SaveProgress()
+	public void DestroyWizard()
 	{
-		PlayerPrefs.SetInt(key, COMPLETED);
+		if (wizardExists)
+			Destroy(wizard);
 	}
+	
 }
