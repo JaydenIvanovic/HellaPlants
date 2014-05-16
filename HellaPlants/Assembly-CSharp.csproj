@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\SceneSwitch.cs" />
      <Compile Include="Assets\Scripts\Spells.cs" />
      <Compile Include="Assets\Scripts\Timer.cs" />
+     <Compile Include="Assets\Scripts\Tutorial.cs" />
      <Compile Include="Assets\Scripts\UFOProjectile.cs" />
      <Compile Include="Assets\Scripts\UfoAI.cs" />
      <Compile Include="Assets\Scripts\UfoSpawner.cs" />

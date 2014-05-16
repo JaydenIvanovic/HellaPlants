@@ -56,7 +56,7 @@ public class WizardPowerups : MonoBehaviour
     {
         if (currentGesture != null)
         {
-            Invoke("DestroyWizard", 15f);
+            Invoke("DestroyWizard", 8f);
             spells.getGestureMap().SetPowerupGesture(currentPowerup, currentGesture);
             wizardExists = true;
             wizard = Instantiate(wizardPrefab) as GameObject;
@@ -173,7 +173,7 @@ public class WizardPowerups : MonoBehaviour
         }
         //failure
         else
-            chance += 0.05f;
+            chance += 0.03f;
     }
 
     public Gestures.direction RandomDirection(Gestures.direction dir)
