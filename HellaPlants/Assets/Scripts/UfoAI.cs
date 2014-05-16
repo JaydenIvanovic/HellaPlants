@@ -49,7 +49,7 @@ public class UfoAI : MonoBehaviour
 		float dist = Vector3.Distance (transform.position, destination);
 
 		//Move towards current destination
-		transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * speed * (float)(diffContr.GetDifficulty() * 0.22 + 1));
+		transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * speed * (float)(diffContr.GetDifficulty() * 0.12 + 1));
 
 		//Get the new distance
 		float newDist = Vector3.Distance (transform.position, destination);
@@ -76,8 +76,8 @@ public class UfoAI : MonoBehaviour
     {
 		float xLoc;
 		do{
-			xLoc = Random.Range(-9, 9);
-		} while (Mathf.Abs(xLoc - destination.x) < 2); //Make sure the next bullet fires from at least a certain distance away
+			xLoc = Random.Range(-11, 11);
+		} while (Mathf.Abs(xLoc - destination.x) < 3); //Make sure the next bullet fires from at least a certain distance away
         destination = new Vector3(xLoc, transform.position.y, transform.position.z);
     }
 
