@@ -19,7 +19,6 @@ public class Spells : MonoBehaviour
 	private GestureMap gestureMap;
 	private WizardPowerups powerups;
 	private PlantState plantState;
-	private BugAI bugs;
 
     // Use this for initialization
 	void Start () 
@@ -28,7 +27,6 @@ public class Spells : MonoBehaviour
         flower = GameObject.Find("Flower");
 		rw = environment.GetComponent<RandomWeather> ();
 		powerups = environment.GetComponent<WizardPowerups> ();
-		bugs = environment.GetComponent<BugAI>();
 		plantState = flower.GetComponent<PlantState>();
         secondsPassed = 0f;
 		gestureMap = new GestureMap ();

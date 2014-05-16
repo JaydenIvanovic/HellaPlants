@@ -15,10 +15,11 @@ public class PlantState : MonoBehaviour
     private RandomWeather rw;
 	private DifficultyController diffContr;
     private SpriteRenderer spriteR;
-	private GameObject environ;
+	private GameObject environ, growthParticles_i;
     private uint growthLevel;
     public Sprite f1, f2, f3, f4, f5;
 	public GameObject growthParticles;
+	private const int STOP_GROWTH = 6;
 
 	// Use this for initialization
 	void Awake () 
@@ -43,7 +44,8 @@ public class PlantState : MonoBehaviour
 	void Update () 
 	{
         // Handle plant growth.
-		Grow ();
+		if(diffContr.GetDifficulty() > growthLevel && diffContr.GetDifficulty() < STOP_GROWTH)
+			Grow();
 
 		// Check the weather.
         if (rw.GetWeather() == RandomWeather.Weather.Sunny)
@@ -162,6 +164,14 @@ public class PlantState : MonoBehaviour
     private void Grow()
     {
 		//Debug.Log ("Difficulty");
+		// Bring particles in front of plant with z change.
+		growthParticles_i = Instantiate(growthParticles, 
+		                                new Vector3(transform.position.x, transform.position.y, -4), 
+		                                transform.rotation) as GameObject;
+		Invoke("DestroyGrowthParticles", 2);
+		audio.Play();
+
+		growthLevel++;
 
         if(diffContr.GetDifficulty() == 1)
             spriteR.sprite = f1;
@@ -173,8 +183,6 @@ public class PlantState : MonoBehaviour
             spriteR.sprite = f4;
 		else if(diffContr.GetDifficulty() == 5)
             spriteR.sprite = f5;
-
-        growthLevel++;
     }
 
 	// Set the plant to be vulnerable or invulnerable.
@@ -187,5 +195,11 @@ public class PlantState : MonoBehaviour
 	public void Regenerate(bool regen)
 	{
 		this.regenerate = regen;
+	}
+
+	private void DestroyGrowthParticles()
+	{
+		if(growthParticles_i)
+			Destroy(growthParticles_i);
 	}
 }

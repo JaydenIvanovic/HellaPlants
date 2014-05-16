@@ -66,7 +66,7 @@ public class WizardPowerups : MonoBehaviour
 			if(currentPowerup == GestureMap.Spell.Shield)
 				wizard.transform.Find("Scroll/Spell").GetComponent<TextMesh>().text = "Shield!";
 			if(currentPowerup == GestureMap.Spell.KillBugs)
-				wizard.transform.Find("Scroll/Spell").GetComponent<TextMesh>().text = "Die Bugs!";
+				wizard.transform.Find("Scroll/Spell").GetComponent<TextMesh>().text = "Meteor!";
 			if(currentPowerup == GestureMap.Spell.SlowTime)
 				wizard.transform.Find("Scroll/Spell").GetComponent<TextMesh>().text = "Slowmo!";
         }
