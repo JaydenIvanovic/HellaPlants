@@ -20,6 +20,7 @@ public class BugAI : MonoBehaviour
 	private float minSpwnRate, maxSpwnRate;
 	public AudioClip squash;
 	private DifficultyController diff;
+	public int requiredDifficulty;
 	private GameObject environment;
 	private PlantState plantState;
 
@@ -103,23 +104,25 @@ public class BugAI : MonoBehaviour
     // If so, the bug is created.
 	private void CreateBugs()
 	{
-        attackTimer.updateTimer(Time.deltaTime);
+		if (diff.GetDifficulty() >= requiredDifficulty){
+        	attackTimer.updateTimer(Time.deltaTime);
 
-        if (attackTimer.hitMaxTime())
-        {
-			// As difficulty increases the maximum and minimum spawn rate will decrease.
-			float max = initalSpwnRate  * (Mathf.Pow(2, -diff.GetDifficulty() * 0.5f)); 
-			float min = initalSpwnRate * (Mathf.Pow(10, -diff.GetDifficulty() * 0.5f)); 
+        	if (attackTimer.hitMaxTime())
+        	{
+				// As difficulty increases the maximum and minimum spawn rate will decrease.
+				float max = initalSpwnRate  * (Mathf.Pow(2, -diff.GetDifficulty() * 0.5f)); 
+				float min = initalSpwnRate * (Mathf.Pow(10, -diff.GetDifficulty() * 0.5f)); 
 
-			// Clamping the spawn rates to a number which is still reasonable for
-			// the player to handle.
-			maxSpwnRate = Mathf.Clamp(max, 0.5f, initalSpwnRate);
-			minSpwnRate = Mathf.Clamp(min, 0.5f, initalSpwnRate);
+				// Clamping the spawn rates to a number which is still reasonable for
+				// the player to handle.
+				maxSpwnRate = Mathf.Clamp(max, 0.5f, initalSpwnRate);
+				minSpwnRate = Mathf.Clamp(min, 0.5f, initalSpwnRate);
 
-            InstantiateBug();
-            attackTimer.setMaxSeconds(Random.Range(minSpwnRate, maxSpwnRate));
-            attackTimer.resetTimer();
-        }
+       	     	InstantiateBug();
+        	    attackTimer.setMaxSeconds(Random.Range(minSpwnRate, maxSpwnRate));
+       	     	attackTimer.resetTimer();
+        	}
+		}
 	}
 
     // Checks whether the bug is close to the plant. 
