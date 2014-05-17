@@ -58,8 +58,6 @@ public class Tutorial : MonoBehaviour {
 			else if (currentDif == 3){
 				wizard = Instantiate(tutorialPrefab4) as GameObject;
 				Time.timeScale = pauseScale;
-				// Played the tutorial to its completion. Remeber this.
-				PlayerPrefs.SetInt(PLAYED_TUTE, 1);
 			}
 			else
 				wizardExists = false;
@@ -72,8 +70,14 @@ public class Tutorial : MonoBehaviour {
 		}
 
 		// If user presses on the screen assume they want to proceed.
-		if ( canDestroy && Input.GetMouseButton(0) ) 
+		if ( canDestroy && Input.GetMouseButton(0) )
+		{
 			DestroyWizard();
+
+			// Played the tutorial to its completion. Remember this.
+			if(currentDif == 3)
+				PlayerPrefs.SetInt(PLAYED_TUTE, 1);
+		}
 
 	}
 
