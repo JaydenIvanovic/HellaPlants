@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\GestureMap.cs" />
      <Compile Include="Assets\Scripts\Gestures.cs" />
      <Compile Include="Assets\Scripts\HealthBar.cs" />
+     <Compile Include="Assets\Scripts\KeyListener.cs" />
      <Compile Include="Assets\Scripts\ListComparer.cs" />
      <Compile Include="Assets\Scripts\LoadLevelonClick.cs" />
      <Compile Include="Assets\Scripts\Meteor.cs" />

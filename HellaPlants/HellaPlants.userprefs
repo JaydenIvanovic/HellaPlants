@@ -1,11 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ScoreManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\KeyListener.cs">
     <Files>
+      <File FileName="Assets\Scripts\ScoreManager.cs" Line="9" Column="43" />
       <File FileName="Assets\Scripts\WizardPowerups.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Tutorial.cs" Line="60" Column="2" />
+      <File FileName="Assets\Scripts\Tutorial.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BugAI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\HealthBar.cs" Line="2" Column="26" />
+      <File FileName="Assets\Scripts\HealthBar.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Meteor.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Spells.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UFOProjectile.cs" Line="1" Column="1" />
@@ -15,7 +16,7 @@
       <File FileName="Assets\Scripts\UfoSpawner.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Timer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\DifficultyController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ScoreManager.cs" Line="27" Column="2" />
+      <File FileName="Assets\Scripts\KeyListener.cs" Line="6" Column="15" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
