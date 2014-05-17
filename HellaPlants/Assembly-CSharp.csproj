@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\DestoryGameObject.cs" />
      <Compile Include="Assets\Scripts\DestoryParticleSystem.cs" />
      <Compile Include="Assets\Scripts\DifficultyController.cs" />
+     <Compile Include="Assets\Scripts\DisplayHighScores.cs" />
      <Compile Include="Assets\Scripts\DisplayScore.cs" />
      <Compile Include="Assets\Scripts\DrawLine.cs" />
      <Compile Include="Assets\Scripts\GameOver.cs" />

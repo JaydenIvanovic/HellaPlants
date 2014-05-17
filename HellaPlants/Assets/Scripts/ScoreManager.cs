@@ -10,12 +10,12 @@ public class ScoreManager : MonoBehaviour
 {
 	private static ScoreManager scoreManager;
 	private const uint MAX_NUM = 5;
-	private string filePath = Application.persistentDataPath +  "/scores.dat";
+	private string filePath; 
 	private float[] scores; // Sorted from highest to lowest.
-
-	// Use this for initialization
-	void Start () 
+	
+	void Awake () 
 	{	
+		filePath = Application.persistentDataPath +  "/scores.dat";
 		scores = new float[MAX_NUM];
 
 		// Singleton style in Unity.
@@ -23,8 +23,15 @@ public class ScoreManager : MonoBehaviour
 			scoreManager = this;
 		else if (scoreManager != this)
 			Destroy(gameObject);
+
+		Load();
 	}
-	
+
+	public float[] GetScores()
+	{
+		return scores;
+	}
+
 	// Initialize all scores to zero.
 	private void InitScores()
 	{
