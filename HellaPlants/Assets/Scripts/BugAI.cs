@@ -155,8 +155,9 @@ public class BugAI : MonoBehaviour
 		audio.PlayOneShot (squash);
         bugs.Remove(bug);
         Destroy(bug);
-		Instantiate(blood, bug.transform.position, bug.transform.rotation);
-		Instantiate(points, bug.transform.position, bug.transform.rotation);
+		// Bring the points forward on the z-axis so they don't fall behind the background.
+		Instantiate(points, bug.transform.position, Quaternion.identity);
+		Instantiate(blood, bug.transform.position, Quaternion.identity);
 		(diff.scr) += 10;
     }
 
