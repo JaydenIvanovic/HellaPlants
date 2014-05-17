@@ -16,6 +16,7 @@ public class ScoreManager : MonoBehaviour
 	void Awake () 
 	{	
 		filePath = Application.persistentDataPath +  "/scores.dat";
+		// Debug.Log (filePath);
 		scores = new float[MAX_NUM];
 
 		// Singleton style in Unity.
@@ -61,10 +62,10 @@ public class ScoreManager : MonoBehaviour
 			{
 				if(scores[i] < score)
 				{
-					// Move all the scores starting at the score which is
-					// to be replaced down by 1.
-					for(int j = i; j < MAX_NUM - 1; ++j)
-						scores[j + 1] = scores[j];
+					// Move all the scores down by 1 from the end
+					// of the array to the score to be replaced.
+					for(uint j = MAX_NUM - 1; j > i; --j)
+						scores[j] = scores[j - 1];
 					// Put the new score into the appropriate position.
 					scores[i] = score;
 					// Finished necessary logic.
