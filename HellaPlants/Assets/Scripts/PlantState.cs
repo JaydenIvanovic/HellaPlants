@@ -50,26 +50,28 @@ public class PlantState : MonoBehaviour
 		// Check the weather.
         if (rw.GetWeather() == RandomWeather.Weather.Sunny)
         {
-			sun = ValueFilter(sun, Time.deltaTime * 5.5f);
-			water = ValueFilter(water, Time.deltaTime * -4f);
+			sun = ValueFilter(sun, Time.deltaTime * 6f);
+			water = ValueFilter(water, Time.deltaTime * -5.5f);
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Rainy)
         {
-            sun = ValueFilter(sun, Time.deltaTime * -4f);
-            water = ValueFilter(water, Time.deltaTime * 5.5f);
+            sun = ValueFilter(sun, Time.deltaTime * -5.5f);
+            water = ValueFilter(water, Time.deltaTime * 6f);
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Cloudy)
         {
-            sun = ValueFilter(sun, Time.deltaTime * -5f);
-            water = ValueFilter(water, Time.deltaTime * -5f);
+            sun = ValueFilter(sun, Time.deltaTime * -7f);
+            water = ValueFilter(water, Time.deltaTime * -7f);
         }
 		else if (rw.GetWeather() == RandomWeather.Weather.Snowy)
 		{
 			TakeDamage(8f);
+			sun = ValueFilter(sun, Time.deltaTime * -2f);
+			water = ValueFilter(water, Time.deltaTime * -2f);
 		}
 
         // Soil always gradually depletes.
-        soil = ValueFilter(soil, Time.deltaTime * -2f);
+        soil = ValueFilter(soil, Time.deltaTime * -3f);
 
 		// If sun, water, or soil bar are at 0 then damage
 		// the plant.

@@ -181,7 +181,7 @@ public class WizardPowerups : MonoBehaviour
         }
         //failure
         else
-            chance += 0.03f;
+            chance += 0.01f;
     }
 
     public Gestures.direction RandomDirection(Gestures.direction dir)

@@ -20,7 +20,6 @@ public class UfoSpawner : MonoBehaviour
 		diff = environment.GetComponent<DifficultyController> ();
 
 		t = new Timer(0);
-		randomizeTimerMax ();
 		UFOCount = 0;
 	}
 

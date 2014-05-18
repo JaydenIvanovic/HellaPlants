@@ -18,7 +18,7 @@ public class UfoAI : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-		speed = 2.2f;
+		speed = 1.8f;
 		hasDestination = false;
 		destination = transform.position;
 		environment = GameObject.FindGameObjectWithTag("Environment");
@@ -27,10 +27,8 @@ public class UfoAI : MonoBehaviour
 		diffContr = environment.GetComponent<DifficultyController> ();
 
 		numBullets = 1;
-		if (diffContr.GetDifficulty () < 3)
-			numBullets = 1;
-		else if (diffContr.GetDifficulty () > 2)
-			numBullets = Random.Range (1,diffContr.GetDifficulty()+1);
+		if (diffContr.GetDifficulty () > 4)
+			numBullets = Random.Range (1,diffContr.GetDifficulty() - 2);
 	}
 	
 	// Update is called once per frame
@@ -49,7 +47,7 @@ public class UfoAI : MonoBehaviour
 		float dist = Vector3.Distance (transform.position, destination);
 
 		//Move towards current destination
-		transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * speed * (float)(diffContr.GetDifficulty() * 0.12 + 1));
+		transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * speed * (float)(diffContr.GetDifficulty() * 0.11 + 1));
 
 		//Get the new distance
 		float newDist = Vector3.Distance (transform.position, destination);
