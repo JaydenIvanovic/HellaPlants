@@ -55,6 +55,9 @@ public class Spells : MonoBehaviour
 #if SPELLSDEBUG
 		Debug.Log (spell);
 #endif
+		if (Time.timeScale == 0)
+			return;
+
 		switch (spell) 
 		{
 			case GestureMap.Spell.Sun:

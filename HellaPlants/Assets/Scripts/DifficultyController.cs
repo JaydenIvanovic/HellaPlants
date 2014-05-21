@@ -8,7 +8,7 @@ using System.Collections;
 public class DifficultyController : MonoBehaviour 
 {
 	private int numBugs;
-	public float scr;
+	public int scr;
 	public static float score;
 	public float changeDiff;
 	public GUIStyle guiStyle;
@@ -31,7 +31,7 @@ public class DifficultyController : MonoBehaviour
 	void Update () 
 	{
 		score = Time.timeSinceLevelLoad + scr;
-		scoreStr = "Score: " + score.ToString ();
+		scoreStr = "Score: " + ((int)score).ToString ();
 
 		// Time to change the difficulty.
 		if (timeSinceLastDiff > changeDiff) 

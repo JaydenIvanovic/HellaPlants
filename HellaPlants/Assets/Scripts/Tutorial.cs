@@ -6,6 +6,7 @@ public class Tutorial : MonoBehaviour {
 	private DifficultyController diff;
 	private GameObject environment;
 	private const string PLAYED_TUTE = "PlayedTutorial";
+	public GameObject tutorialPrefab0;
 	public GameObject tutorialPrefab1;
 	public GameObject tutorialPrefab2;
 	public GameObject tutorialPrefab3;
@@ -14,10 +15,12 @@ public class Tutorial : MonoBehaviour {
 	private int currentDif;
 	private bool wizardExists, canDestroy;
 	private float pauseScale = 0f, unPauseTime = 0f;
+	private bool firstScreen;
 
 	// Use this for initialization
 	void Start () {
-		// PlayerPrefs.DeleteAll() uncomment this if you want to reset playerprefs.
+		firstScreen = false;
+		PlayerPrefs.DeleteAll ();
 
 		environment = GameObject.FindGameObjectWithTag ("Environment");
 		diff = environment.GetComponent<DifficultyController> ();
@@ -41,10 +44,13 @@ public class Tutorial : MonoBehaviour {
 
 			wizardExists = true;
 			// Work around as we can't use invoke with a timescale of 0f.
-			unPauseTime = Time.realtimeSinceStartup + 3f;
+			unPauseTime = Time.realtimeSinceStartup + 1.5f;
 
 			if (currentDif == 0){
-				wizard = Instantiate(tutorialPrefab1) as GameObject;
+				if (firstScreen == false)
+					wizard = Instantiate(tutorialPrefab0) as GameObject;
+				else
+					wizard = Instantiate(tutorialPrefab1) as GameObject;
 				Time.timeScale = pauseScale;
 			}
 			else if (currentDif == 1){
@@ -83,6 +89,10 @@ public class Tutorial : MonoBehaviour {
 
 	public void DestroyWizard()
 	{
+		if (firstScreen == false) {
+			currentDif--;
+			firstScreen = true;
+		}
 		if (wizardExists)
 			Destroy(wizard);
 
