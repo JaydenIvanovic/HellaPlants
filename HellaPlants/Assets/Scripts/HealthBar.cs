@@ -12,10 +12,34 @@ public class HealthBar : MonoBehaviour
     public Texture2D fullTex;
 	public Texture2D fullyEmptyTex;
     public GUIStyle style;
+	public float flashThreshold;
+	private float flashInterval;
+	private float timeToFlash;
+	private bool flash;
 
-	void OnStart()
+	void Start()
 	{
+		flashInterval = 0.35f;
+		flash = false;
+	}
 
+	void Update()
+	{
+		if (barDisplay > flashThreshold){
+			flash = false;
+			timeToFlash = flashInterval;
+		}
+		else{
+			timeToFlash -= Time.deltaTime;
+		}
+
+		if (timeToFlash <= 0f){
+			timeToFlash = flashInterval;
+			if (flash == true)
+				flash = false;
+			else
+				flash = true;
+		}
 	}
 
     void OnGUI()
@@ -26,7 +50,7 @@ public class HealthBar : MonoBehaviour
 
         //draw the background:
         GUI.BeginGroup(new Rect(Screen.width * pos.x, Screen.height * pos.y, newSize.x, newSize.y));
-		if (barDisplay > 0)
+		if (flash == false)
 			GUI.Box(new Rect(0, 0, newSize.x, newSize.y), emptyTex, style);
 		else
 			GUI.Box(new Rect(0, 0, newSize.x, newSize.y), fullyEmptyTex, style);
