@@ -10,6 +10,7 @@ public class HealthBar : MonoBehaviour
     public Vector2 size;
     public Texture2D emptyTex;
     public Texture2D fullTex;
+	public Texture2D fullyEmptyTex;
     public GUIStyle style;
 
 	void OnStart()
@@ -25,7 +26,10 @@ public class HealthBar : MonoBehaviour
 
         //draw the background:
         GUI.BeginGroup(new Rect(Screen.width * pos.x, Screen.height * pos.y, newSize.x, newSize.y));
-		GUI.Box(new Rect(0, 0, newSize.x, newSize.y), emptyTex, style);
+		if (barDisplay > 0)
+			GUI.Box(new Rect(0, 0, newSize.x, newSize.y), emptyTex, style);
+		else
+			GUI.Box(new Rect(0, 0, newSize.x, newSize.y), fullyEmptyTex, style);
 
         //draw the filled-in part:
 		GUI.BeginGroup(new Rect(0, 0, newSize.x * barDisplay, newSize.y));
