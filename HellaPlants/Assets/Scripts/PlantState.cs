@@ -50,13 +50,13 @@ public class PlantState : MonoBehaviour
 		// Check the weather.
         if (rw.GetWeather() == RandomWeather.Weather.Sunny)
         {
-			sun = ValueFilter(sun, Time.deltaTime * 6f);
+			sun = ValueFilter(sun, Time.deltaTime * 7f);
 			water = ValueFilter(water, Time.deltaTime * -5.5f);
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Rainy)
         {
             sun = ValueFilter(sun, Time.deltaTime * -5.5f);
-            water = ValueFilter(water, Time.deltaTime * 6f);
+            water = ValueFilter(water, Time.deltaTime * 7f);
         }
         else if (rw.GetWeather() == RandomWeather.Weather.Cloudy)
         {
