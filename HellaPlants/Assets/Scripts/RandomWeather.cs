@@ -200,7 +200,7 @@ public class RandomWeather : MonoBehaviour
 		if (snd) 
 		{
 			Destroy(GameObject.Find("One shot audio"));
-			AudioSource.PlayClipAtPoint(snd, transform.position,100F);
+			AudioSource.PlayClipAtPoint(snd, transform.position, 50F);
 		}
 	}
 }

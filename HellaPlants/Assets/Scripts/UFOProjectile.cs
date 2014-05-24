@@ -47,14 +47,18 @@ public class UFOProjectile : MonoBehaviour
 		// We only care if the flower was hit.
 		if (collision.gameObject.name == "Flower") 
 		{
-			audioSource.PlayOneShot(explosionSnd);
 			plantState.TakePureDamage(50f);
-			Destroy (gameObject);
+			DestroyProjectile();
 		}
 	}
 
 	// User hit it so destroy it...
 	void OnMouseDown()
+	{
+		DestroyProjectile();
+	}
+
+	void DestroyProjectile()
 	{
 		Destroy(gameObject);
 		audioSource.PlayOneShot(explosionSnd);

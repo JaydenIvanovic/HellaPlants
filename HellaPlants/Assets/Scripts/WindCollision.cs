@@ -6,7 +6,6 @@ using System.Collections;
 public class WindCollision : MonoBehaviour
 {
     private BugAI bugAI;
-	public GameObject blood;
 
     void Start()
     {
@@ -27,10 +26,7 @@ public class WindCollision : MonoBehaviour
 		if (Input.GetMouseButtonDown (0)) 
 		{
             if( Vector2.Distance(mouse, gameObject.transform.position) < 0.6) 
-			{
 				bugAI.RemoveBug (gameObject);
-				Instantiate(blood, gameObject.transform.position, gameObject.transform.rotation);
-			}
 		}
 	}
 }

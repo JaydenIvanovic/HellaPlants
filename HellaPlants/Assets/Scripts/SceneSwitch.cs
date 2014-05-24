@@ -7,6 +7,11 @@ public class SceneSwitch : MonoBehaviour
 {
 	public string scene; // The scene to be switched to.
 
+	void OnStart()
+	{
+
+	}
+
 	void OnMouseDown()
 	{
 		Application.LoadLevel (scene);
@@ -23,7 +28,6 @@ public class SceneSwitch : MonoBehaviour
 
 	}
 
-	// Similar as above method.
 	void OnMouseExit()
 	{
 

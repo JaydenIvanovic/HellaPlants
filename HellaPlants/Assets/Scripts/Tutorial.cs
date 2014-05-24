@@ -11,7 +11,8 @@ public class Tutorial : MonoBehaviour {
 	public GameObject tutorialPrefab2;
 	public GameObject tutorialPrefab3;
 	public GameObject tutorialPrefab4;
-	private GameObject wizard;
+	public GameObject tapPrefab;
+	private GameObject wizard, tap;
 	private int currentDif;
 	private bool wizardExists, canDestroy;
 	private float pauseScale = 0f, unPauseTime = 0f;
@@ -71,14 +72,18 @@ public class Tutorial : MonoBehaviour {
 	
 		// following on from the above workaround.
 		if(wizardExists) {
-			if(Time.realtimeSinceStartup > unPauseTime)
+			if(Time.realtimeSinceStartup > unPauseTime) {
 				canDestroy = true;
+				if(tap == null)
+					tap = Instantiate(tapPrefab) as GameObject;
+			}
 		}
 
 		// If user presses on the screen assume they want to proceed.
 		if ( canDestroy && Input.GetMouseButton(0) )
 		{
 			DestroyWizard();
+			Destroy(tap);
 
 			// Played the tutorial to its completion. Remember this.
 			if(currentDif == 3)

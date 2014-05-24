@@ -7,11 +7,33 @@ using System.Collections;
 public class PauseGamePrefab : MonoBehaviour 
 {
 	public GameObject menuPrefab;
+	public string tagName;
+	private bool paused;
+
+	void OnStart()
+	{
+		paused = false;
+	}
 
 	void OnMouseDown()
 	{
-		Instantiate(menuPrefab);
-		// Pause game. The menu should unpause itself upon destruction.
-		Time.timeScale = 0; 
+		if(!paused)
+		{
+			paused = true;
+			Instantiate(menuPrefab);
+			// Pause game. The menu should unpause itself upon destruction.
+			Time.timeScale = 0;
+		}
+		else
+		{
+			paused = false;
+			Destroy(GameObject.FindGameObjectWithTag(tagName));
+			Time.timeScale = 1;
+		}
+	}
+
+	public void UnPause()
+	{
+		paused = false;
 	}
 }
