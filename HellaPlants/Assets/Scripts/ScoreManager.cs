@@ -12,12 +12,15 @@ public class ScoreManager : MonoBehaviour
 	private const uint MAX_NUM = 5;
 	private string filePath; 
 	private float[] scores; // Sorted from highest to lowest.
+	private string[] names; // name in position i corresponds to player with score in scores[i]
 	
 	void Awake () 
 	{	
 		filePath = Application.persistentDataPath +  "/scores.dat";
-		// Debug.Log (filePath);
+		//Debug.Log (filePath);
+
 		scores = new float[MAX_NUM];
+		names = new string[MAX_NUM];
 
 		// Singleton style in Unity.
 		if (scoreManager == null)
@@ -33,11 +36,19 @@ public class ScoreManager : MonoBehaviour
 		return scores;
 	}
 
+	public string[] GetNames()
+	{
+		return names;
+	}
+
 	// Initialize all scores to zero.
 	private void InitScores()
 	{
 		for(int i = 0; i < MAX_NUM; ++i)
+		{
 			scores[i] = 0;
+			names[i] = "Wizard";
+		}
 	}
 	
 	// The score is higher than the lowest one recorded,
@@ -52,7 +63,7 @@ public class ScoreManager : MonoBehaviour
 	// Add a new high score to the board.
 	// This calls IsHighScore() for insurance that
 	// the new score to be added is actually a high score.
-	public void AddScore(float score)
+	public void AddScore(float score, string playerName)
 	{
 		if( IsHighScore(score) )
 		{
@@ -65,9 +76,13 @@ public class ScoreManager : MonoBehaviour
 					// Move all the scores down by 1 from the end
 					// of the array to the score to be replaced.
 					for(uint j = MAX_NUM - 1; j > i; --j)
+					{
 						scores[j] = scores[j - 1];
+						names[j] = names[j - 1];
+					}
 					// Put the new score into the appropriate position.
 					scores[i] = score;
+					names[i] = playerName;
 					// Finished necessary logic.
 					return; 
 				}
@@ -81,7 +96,7 @@ public class ScoreManager : MonoBehaviour
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream fstream = File.Create(filePath);
 
-		ScoreData data = new ScoreData(scores); // Add to transfer object.
+		ScoreData data = new ScoreData(scores, names); // Add to transfer object.
 
 		bf.Serialize(fstream, data);
 		fstream.Close();
@@ -100,6 +115,7 @@ public class ScoreManager : MonoBehaviour
 
 			// Put the data back into the array.
 			scores = scoreData.GetScores().Clone() as float[];
+			names = scoreData.GetNames().Clone() as string[];
 		}
 		else
 			InitScores();
@@ -111,15 +127,29 @@ public class ScoreManager : MonoBehaviour
 	private class ScoreData
 	{
 		private float[] scores;
+		private string[] names;
 		
-		public ScoreData(float[] scoreData)
+		public ScoreData(float[] scoreData, string[] nameData)
 		{
 			scores = scoreData;
+			names = nameData;
 		}
 
 		public float[] GetScores()
 		{
 			return scores;
 		}
+
+		public string[] GetNames()
+		{
+			return names;
+		}
+	}
+
+	void OnMouseDown()
+	{
+		string playerName = Camera.main.GetComponent<EnterName>().GetPlayerName();
+		AddScore(DifficultyController.GetScore(), playerName);
+		Save();
 	}
 }

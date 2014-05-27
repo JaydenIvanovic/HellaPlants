@@ -1,8 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\HealthBar.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DisplayHighScores.cs">
     <Files>
-      <File FileName="Assets\Scripts\HealthBar.cs" Line="19" Column="2" />
+      <File FileName="Assets\Scripts\EnterName.cs" Line="21" Column="18" />
+      <File FileName="Assets\Scripts\ScoreManager.cs" Line="119" Column="4" />
+      <File FileName="Assets\Scripts\DisplayScore.cs" Line="9" Column="28" />
+      <File FileName="Assets\Scripts\DisplayHighScores.cs" Line="6" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -14,6 +14,9 @@ public class DisplayHighScores : MonoBehaviour
 		int count = 0;
 		// Populate the high scores.
 		foreach ( TextMesh tm in GetComponentsInChildren<TextMesh>() )
-			tm.text = "Wizard: " + scoreManager.GetScores()[count++];
+		{
+			tm.text = scoreManager.GetNames()[count] + ": " + scoreManager.GetScores()[count];
+			count++;
+		}
 	}
 }
