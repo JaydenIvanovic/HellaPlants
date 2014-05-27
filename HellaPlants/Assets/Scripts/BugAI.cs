@@ -110,8 +110,8 @@ public class BugAI : MonoBehaviour
         	if (attackTimer.hitMaxTime())
         	{
 				// As difficulty increases the maximum and minimum spawn rate will decrease.
-				float max = initalSpwnRate  * (Mathf.Pow(2, -diff.GetDifficulty() * 0.5f)); 
-				float min = initalSpwnRate * (Mathf.Pow(10, -diff.GetDifficulty() * 0.5f)); 
+				float max = initalSpwnRate  * (Mathf.Pow(2, -diff.GetDifficulty() * 0.35f)); 
+				float min = initalSpwnRate * (Mathf.Pow(10, -diff.GetDifficulty() * 0.35f)); 
 
 				// Clamping the spawn rates to a number which is still reasonable for
 				// the player to handle.

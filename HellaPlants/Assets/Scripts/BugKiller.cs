@@ -31,7 +31,7 @@ public class BugKiller : MonoBehaviour
 		if (Input.GetMouseButtonDown (0)) 
 		{
 			// Will need to tweak this distance for touch devices...
-            if( Vector2.Distance(mouse, gameObject.transform.position) < 0.6) 
+            if( Vector2.Distance(mouse, gameObject.transform.position) < 0.8) 
 			{
 				bugAI.RemoveBug (gameObject);
 			}
